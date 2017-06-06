@@ -47,3 +47,8 @@
 .signed{
 	text-align: right;
 }
+
+.partners img{
+	width: 40%;
+	margin: 0 auto;
+}

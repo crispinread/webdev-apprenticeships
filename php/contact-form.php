@@ -59,7 +59,7 @@ try {
 
 	$mail->AddAddress($email);	 						       // Add another recipient
 
-	$mail->AddAddress('sheena@happy.com', 'Person 2');     // Add a secondary recipient
+	$mail->AddAddress('sheena@happy.com', 'Sheena Morris');     // Add a secondary recipient
 	//$mail->AddCC('person3@domain.com', 'Person 3');          // Add a "Cc" address. 
 	//$mail->AddBCC('person4@domain.com', 'Person 4');         // Add a "Bcc" address. 
 

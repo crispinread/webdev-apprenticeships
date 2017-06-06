@@ -1,0 +1,49 @@
+/* Add here all your CSS customizations */
+#mc_embed_signup{
+	width: 80%;
+	margin: 0 auto;
+}
+#mc_embed_signup .mc-field-group.input-group input{
+    margin: 10px;
+}
+#mc_embed_signup .button{
+	height: auto;
+}
+
+#mc_embed_signup input#mce-EMAIL{
+    border: 1px solid #ABB0B2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.section-costs {
+	color: #fff;
+	font-size: 1.6em;
+	background-color: #0099e6;
+}
+.section-text-light .testimonial.testimonial blockquote p{
+	font-size: 2.2em;
+}
+
+.center .list.tick-list li .fa{
+	position: relative;
+	font-size: 2em;
+}
+.thumb-info .thumb-info-title {
+	bottom: 1%;
+}
+
+.counters .fa, .counters .icons {
+	font-size:80px;
+	line-height: 90px
+}
+
+.counters strong {
+    display: block;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 50px;
+}
+.signed{
+	text-align: right;
+}

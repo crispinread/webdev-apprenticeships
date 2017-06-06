@@ -13,7 +13,7 @@ header('Content-type: application/json');
 require_once('php-mailer/PHPMailerAutoload.php');
 
 // Step 1 - Enter your email address below.
-$email = 'hello@mwda.uk';
+$email = 'hello@usercrunch.com';
 
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
 $debug = 0;
@@ -59,7 +59,7 @@ try {
 
 	$mail->AddAddress($email);	 						       // Add another recipient
 
-	$mail->AddAddress('crispin@usercrunch.com', 'Person 2');     // Add a secondary recipient
+	$mail->AddAddress('sheena@happy.com', 'Person 2');     // Add a secondary recipient
 	//$mail->AddCC('person3@domain.com', 'Person 3');          // Add a "Cc" address. 
 	//$mail->AddBCC('person4@domain.com', 'Person 4');         // Add a "Bcc" address. 
 

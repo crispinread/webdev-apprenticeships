@@ -21,6 +21,9 @@
 	font-size: 1.6em;
 	background-color: #0099e6;
 }
+html section.section-costs p {
+	color: #fff;
+	}
 .section-text-light .testimonial.testimonial blockquote p{
 	font-size: 2.2em;
 }

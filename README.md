@@ -1,2 +1,2 @@
-# User Crunch Web Dev Apprenticeships
+# Web Dev Apprenticeships
 Temp site for Apprenticeship Scheme

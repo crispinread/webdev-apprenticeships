@@ -55,3 +55,19 @@ html section.section-costs p {
 	width: 40%;
 	margin: 0 auto;
 }
+
+.values p{
+	font-size: 3em;
+	font-weight: bold;
+	line-height:32px;
+	color: #ffffff;
+}
+
+.drupal-intro img{
+	width: 100%;
+	margin: auto;
+}
+
+section.section-custom-map {
+    background: transparent url(../img/web-dev-bootcamp.jpg) center 0 no-repeat;
+	}

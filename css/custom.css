@@ -25,3 +25,16 @@
 .balloon-photo i{
   font-size: 60px
 }
+
+h1.page-title {
+    font-size: 3.2em;
+    line-height: 44px;
+    margin: 32px 0 32px 0;
+}
+
+.space-below{
+  margin-bottom: 32px;
+}
+.background-color-slate{
+  background-color: #1A1C1F;
+}

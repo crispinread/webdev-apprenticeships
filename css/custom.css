@@ -38,3 +38,8 @@ h1.page-title {
 .background-color-slate{
   background-color: #1A1C1F;
 }
+.contacts ul{
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+}

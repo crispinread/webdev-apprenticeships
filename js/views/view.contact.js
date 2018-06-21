@@ -1,12 +1,34 @@
 /*
 Name: 			View - Contact
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
+Theme Version:	6.2.0
 */
 
 (function($) {
 
 	'use strict';
+
+	/*
+	Custom Rules
+	*/
+	
+	// No White Space
+	$.validator.addMethod("noSpace", function(value, element) {
+    	if( $(element).attr('required') ) {
+    		return value.search(/[a-z0-9]/i) == 0;
+    	}
+
+    	return true;
+	}, 'Please fill this empty field.');
+
+	/*
+	Assign Custom Rules on Fields
+	*/
+	$.validator.addClassRules({
+	    'form-control': {
+	        noSpace: true
+	    }
+	});
 
 	/*
 	Contact Form: Basic
@@ -18,9 +40,10 @@ Version: 		4.9.1
 				$messageSuccess = $('#contactSuccess'),
 				$messageError = $('#contactError'),
 				$submitButton = $(this.submitButton),
-				$errorMessage = $('#mailErrorMessage');
+				$errorMessage = $('#mailErrorMessage'),
+				submitButtonText = $submitButton.val();
 
-			$submitButton.button('loading');
+			$submitButton.val( $submitButton.data('loading-text') ? $submitButton.data('loading-text') : 'Loading...' ).attr('disabled', true);
 
 			// Ajax Submit
 			$.ajax({
@@ -38,8 +61,8 @@ Version: 		4.9.1
 
 				if (data.response == 'success') {
 
-					$messageSuccess.removeClass('hidden');
-					$messageError.addClass('hidden');
+					$messageSuccess.removeClass('d-none');
+					$messageError.addClass('d-none');
 
 					// Reset Form
 					$form.find('.form-control')
@@ -47,7 +70,7 @@ Version: 		4.9.1
 						.blur()
 						.parent()
 						.removeClass('has-success')
-						.removeClass('has-error')
+						.removeClass('has-danger')
 						.find('label.error')
 						.remove();
 
@@ -57,7 +80,9 @@ Version: 		4.9.1
 						}, 300);
 					}
 
-					$submitButton.button('reset');
+					$form.find('.form-control').removeClass('error');
+
+					$submitButton.val( submitButtonText ).attr('disabled', false);
 					
 					return;
 
@@ -67,8 +92,8 @@ Version: 		4.9.1
 					$errorMessage.html(data.responseText).show();
 				}
 
-				$messageError.removeClass('hidden');
-				$messageSuccess.addClass('hidden');
+				$messageError.removeClass('d-none');
+				$messageSuccess.addClass('d-none');
 
 				if (($messageError.offset().top - 80) < $(window).scrollTop()) {
 					$('html, body').animate({
@@ -79,7 +104,7 @@ Version: 		4.9.1
 				$form.find('.has-success')
 					.removeClass('has-success');
 					
-				$submitButton.button('reset');
+				$submitButton.val( submitButtonText ).attr('disabled', false);
 
 			});
 		}
@@ -105,7 +130,7 @@ Version: 		4.9.1
 		},
 		errorPlacement: function(error, element) {
 			if (element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
-				error.appendTo(element.parent().parent());
+				error.appendTo(element.closest('.form-group'));
 			} else {
 				error.insertAfter(element);
 			}

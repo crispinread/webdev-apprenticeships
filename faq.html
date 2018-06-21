@@ -1,392 +1,539 @@
 <!DOCTYPE html>
-<html class="boxed">
-	<head>
+<html>
 
-		<!-- Basic -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84008508-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-		<title>Web Development Apprenticeship - FAQ | User Crunch</title>
+	  gtag('config', 'UA-84008508-1');
+	</script>
+  <!-- Basic -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-		<meta name="description" content="A modern technical apprenticeship scheme for web development. 12 month programme of industry lead, learner focussed training and mentored on-the-job experience">
-		<meta name="author" content="crispinread.co.uk">
+  <title>Web Developer Apprenticeship FAQ - Industry led, community driven</title>
 
-		<!-- Favicon -->
-		<link rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-icon-57x57.png">
-		<link rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-icon-60x60.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="/img/icons/apple-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="/img/icons/apple-icon-76x76.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="/img/icons/apple-icon-114x114.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="/img/icons/apple-icon-120x120.png">
-		<link rel="apple-touch-icon" sizes="144x144" href="/img/icons/apple-icon-144x144.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="/img/icons/apple-icon-152x152.png">
-		<link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-icon-180x180.png">
-		<link rel="icon" type="image/png" sizes="192x192"  href="/img/icons/android-icon-192x192.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="96x96" href="/img/icons/favicon-96x96.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-		<link rel="manifest" href="/img/icons/manifest.json">
-		<meta name="msapplication-TileColor" content="#ffffff">
-		<meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png">
-		<meta name="theme-color" content="#ffffff">
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Expert training in the skills that matter now. This is an apprenticeship created and run by web developers for the benfit of business, the industry and the community.">
+  <meta name="author" content="Crispin Read">
 
-		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="57x57" href="img/icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="img/icon/img/icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="img/icon/img/icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="img/icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="img/icon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+  <link rel="manifest" href="/img/icon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="img/icon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.min.css">
-		<link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.min.css">
-		<link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.min.css">
-		<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.min.css">
-		<link href="http://cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="css/theme.css">
-		<link rel="stylesheet" href="css/theme-elements.css">
-		<link rel="stylesheet" href="css/theme-blog.css">
-		<link rel="stylesheet" href="css/theme-shop.css">
-		<link rel="stylesheet" href="css/theme-animate.css">
+  <!-- Web Fonts  -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css">
 
-		<!-- Current Page CSS -->
-		<link rel="stylesheet" href="vendor/rs-plugin/css/settings.css">
-		<link rel="stylesheet" href="vendor/rs-plugin/css/layers.css">
-		<link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css">
-		<link rel="stylesheet" href="vendor/circle-flip-slideshow/css/component.css">
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="vendor/animate/animate.min.css">
+  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.min.css">
+  <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.min.css">
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="css/skins/default.css">
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/theme-elements.css">
+  <link rel="stylesheet" href="css/theme-blog.css">
+  <link rel="stylesheet" href="css/theme-shop.css">
 
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="css/custom.css">
+  <!-- Current Page CSS -->
+  <link rel="stylesheet" href="vendor/rs-plugin/css/settings.css">
+  <link rel="stylesheet" href="vendor/rs-plugin/css/layers.css">
+  <link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css">
 
-		<!-- Head Libs -->
-		<script src="vendor/modernizr/modernizr.min.js"></script>
+  <!-- Demo CSS -->
+  <link rel="stylesheet" href="css/demos/demo-one-page-agency.css">
 
-	</head>
-	<body>
-		<div class="body">
-			<header id="header" data-plugin-options='{"stickyEnabled": true, "stickyEnableOnBoxed": true, "stickyEnableOnMobile": true, "stickyStartAt": 57, "stickySetTop": "-57px", "stickyChangeLogo": true}'>
-				<div class="header-body">
-					<div class="header-container container">
-						<div class="header-row">
-							<div class="header-column">
-								<div class="header-logo">
-									<a href="index.html">
-										<img alt="User Crunch - Web Developer Apprenticeships Logo" width="180" height="65" data-sticky-width="120" data-sticky-height="43" data-sticky-top="34" src="img/user-crunch-wda-logo.png">
-									</a>
-								</div>
-							</div>
-							<div class="header-column">
-								<div class="header-row">
-									<nav class="header-nav-top">
-										<ul class="nav nav-pills">
-											<li class="hidden-xs">
-												<a href="overview.html"><i class="fa fa-angle-right"></i> Overview</a>
-											</li>
-											<li class="hidden-xs">
-												<a href="contact-us.html"><i class="fa fa-angle-right"></i> Contact Us</a>
-											</li>
-											<li>
-												<span class="ws-nowrap"><i class="fa fa-phone"></i>0113 314 3737</span>
-											</li>
-										</ul>
-									</nav>
-								</div>
-								<div class="header-row">
-									<div class="header-nav">
-										<button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main">
-											<i class="fa fa-bars"></i>
-										</button>
-										<!--<ul class="header-social-icons social-icons hidden-xs">
-											<li class="social-icons-facebook"><a href="https://www.facebook.com/Web-Development-Apprenticeship-111339325988454/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-											<li class="social-icons-twitter"><a href="http://www.twitter.com/happyapprents" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-											<li class="social-icons-linkedin"><a href="https://www.linkedin.com/pulse/drupal-wordpress-magento-apprenticeships-sheena-morris?articleId=6169486597277437953" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-										</ul>-->
-										<div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-											<nav>
-												<ul class="nav nav-pills" id="mainNav">
-													<li>
-														<a href="/">
+  <!-- Skin CSS -->
+  <link rel="stylesheet" href="css/skins/skin-one-page-agency.css">
+
+  <!-- Theme Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Head Libs -->
+  <script src="vendor/modernizr/modernizr.min.js"></script>
+
+</head>
+
+<body data-spy="scroll" data-target=".wrapper-spy" data-offset="100">
+
+  <div class="body">
+    <header id="header" >
+      <div class="header-body">
+        <div class="header-container container-fluid px-0">
+          <div class="header-row">
+            <div class="header-column custom-divider-1">
+              <div class="header-row">
+                <div class="header-logo px-4">
+                  <img alt="Web Developer Apprenticeship Logo" width="121" height="28" src="img/logos/web-dev-apprentice-logo.png">
+                </div>
+              </div>
+            </div>
+            <div class="header-column justify-content-center w-100">
+              <div class="header-row">
+                <div class="header-nav justify-content-center">
+                  <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                    <nav class="wrapper-spy collapse">
+                      <ul class="nav nav-pills" id="mainNav">
+                        <li>
+                          <a class="nav-link" href="index.html#home" data-hash>
 															Home
 														</a>
-													</li>
-													<li>
-														<a href="/apply/">
+                        </li>
+                        <li>
+                          <a class="nav-link" href="leeds.html" data-hash data-hash-offset="32">
+															Leeds
+														</a>
+                        </li>
+                        <li>
+                          <a class="nav-link" href="london.html" data-hash data-hash-offset="32">
+															London
+														</a>
+                        </li>
+                        <li>
+                          <a class="nav-link" href="apply.html" data-hash data-hash-offset="32">
 															Apply
 														</a>
-													</li>
-													<li class="active">
-														<a href="/faq.html">
-															FAQ
+                        </li>
+                      <li>
+                        <a class="nav-link active" href="faq.html" data-hash data-hash-offset="32">
+                            FAQ
+                          </a>
+                      </li>
+                        <li>
+                          <a class="nav-link" href="contact.html" data-hash>
+															Contact
 														</a>
-													</li>
-													<li>
-														<a href="/about.html">
-															About
-														</a>
-													</li>
-													<!-- hide temp <li>
-														<a href="/candidates.html">
-															Candidates
-														</a>
-													</li> -->
-												</ul>
-											</nav>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</header>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header-column custom-divider-1 _left justify-content-end">
+              <div class="header-row px-4">
+                <ul class="social-icons custom-social-icons-style-1 d-none d-md-flex">
+                  <li class="social-icons-github">
+                    <a href="https://github.com/wdanuk" class="text-color-quaternary" target="_blank" title="WDAN on GitHub">
+												<i class="fab fa-github"></i>
+											</a>
+                  </li>
+                  <li class="social-icons-twitter">
+                    <a href="http://www.twitter.com/crispinread" class="text-color-quaternary" target="_blank" title="Crispin Read on Twitter">
+												<i class="fab fa-twitter"></i>
+											</a>
+                  </li>
+                  <li class="social-icons-linkedin">
+                    <a href="https://www.linkedin.com/company/web-development-apprenticeships/" class="text-color-quaternary" target="_blank" title="WDAN on Linkedin">
+												<i class="fab fa-linkedin-in"></i>
+											</a>
+                  </li>
+                </ul>
+                <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+										<i class="fas fa-bars"></i>
+									</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-			<div role="main" class="main">
+    <div role="main" class="main">
 
-				<section class="page-header">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<ul class="breadcrumb">
-									<li><a href="#">Home</a></li>
-									<li class="active">FAQ</li>
-								</ul>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<h1>FAQ</h1>
-							</div>
-						</div>
-					</div>
-				</section>
+      <section id="what-we-are" class="section section-no-border background-color-light m-0">
+        <div class="container">
+          <div class="row text-center">
+            <div class="col">
+              <h1>FAQ</h1>
+              <p class="custom-section-sub-title">Coming Soon - please use the form below to get in touch and we'll send you some info straight away.</p>
+            </div>
+          </div>
+
+      </section>
+
+			<!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+      <div id="googlemaps" class="google-map m-0 custom-contact-pos"></div>
+
+      <section class="section section-no-border background-color-slate m-0 p-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-5 custom-contact-box custom-contact-pos background-color-slate">
+              <h2 class="text-color-light">Contact Us via User Crunch</h2>
+              <div class="feature-box feature-box-style-2 custom-feature-box-style-2 mb-4">
+                <div class="feature-box-icon">
+                  <i class="icon-call-in icons text-color-secondary"></i>
+                </div>
+                <div class="feature-box-info">
+                  <h6 class="mb-0 text-2">Call Crispin or Rachel</h6>
+                  <a href="tel:+441134601024" class="text-color-light text-decoration-none">0113 460 1024</a>
+                </div>
+              </div>
+              <div class="feature-box feature-box-style-2 custom-feature-box-style-2 mb-4">
+                <div class="feature-box-icon">
+                  <i class="icon-location-pin icons text-color-secondary"></i>
+                </div>
+                <div class="feature-box-info">
+                  <h6 class="mb-0 text-2">Drop in to see us</h6>
+                  <p class="tall text-color-light">Platform, New Station Street, Leeds, LS1 4JB</p>
+                </div>
+                <div class="feature-box-info">
+                  <h6 class="mb-0 text-2">Meet for coffee</h6>
+                  <p class="tall text-color-light"><a href="https://coffee.crsp.in">Coffee.Crsp.in</a></p>
+                </div>
+              </div>
+              <h5 class="text-color-light">FIND OUT MORE</h5>
+              <form id="contactForm" class="custom-contact-form-style-1" action="php/contact-form.php" method="POST">
+                <div class="alert alert-success d-none mt-4" id="contactSuccess">
+                  <strong>Thanks :)</strong> We'll be in touch in a jiffy.
+                </div>
+
+                <div class="alert alert-danger d-none mt-4" id="contactError">
+                  <strong>Oh Dear :(</strong> There was an error sending your message.
+                  <span class="text-1 mt-2 d-block" id="mailErrorMessage"></span>
+                </div>
+                <div class="form-row _divider">
+                  <div class="form-group col-sm-6">
+                    <input type="text" value="" maxlength="100" class="form-control" name="name" id="name" placeholder="YOUR NAME" required>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <input type="text" value="" maxlength="100" class="form-control" name="phone" id="phone" placeholder="PHONE" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <input type="email" value="" maxlength="100" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col">
+                    <input type="text" value="" maxlength="100" class="form-control" name="company" id="company" placeholder="COMPANY/ORG NAME" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <input type="submit" value="SEND ME SOME INFO" class="btn btn-primary custom-btn-style-2 text-color-light custom-margin-2 float-right mt-2" data-loading-text="Loading...">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <footer id="footer" class="m-0 p-0">
+      <div class="footer-copyright background-color-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-9 mb-1">
+              <p>© Copyright 2018. All Rights Reserved.</p>
+            </div>
+            <div class="col-sm-3 text-sm-right">
+              <ul class="social-icons custom-social-icons-style-2">
+                <li class="social-icons-facebook">
+                  <a href="https://github.com/wdanuk" class="text-color-quaternary" target="_blank" title="Facebook">
+										<i class="fab fa-github"></i>
+									</a>
+                </li>
+                <li class="social-icons-twitter">
+                  <a href="http://www.twitter.com/crispin_read" class="text-color-quaternary" target="_blank" title="Twitter">
+										<i class="fab fa-twitter"></i>
+									</a>
+                </li>
+                <li class="social-icons-linkedin">
+                  <a href="https://www.linkedin.com/company/web-development-apprenticeships/" class="text-color-quaternary" target="_blank" title="Linkedin">
+										<i class="fab fa-linkedin-in"></i>
+									</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Vendor -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery.appear/jquery.appear.min.js"></script>
+    <script src="vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-cookie/jquery-cookie.min.js"></script>
+    <script src="vendor/popper/umd/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/common/common.min.js"></script>
+    <script src="vendor/jquery.validation/jquery.validation.min.js"></script>
+    <script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+    <script src="vendor/jquery.gmap/jquery.gmap.min.js"></script>
+    <script src="vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+    <script src="vendor/isotope/jquery.isotope.min.js"></script>
+    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="vendor/vide/vide.min.js"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="js/theme.js"></script>
+
+    <!-- Current Page Vendor and Views -->
+    <script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+
+    <!-- Current Page Vendor and Views -->
+    <script src="js/views/view.contact.js"></script>
+
+    <!-- Demo -->
+    <script src="js/demos/demo-one-page-agency.js"></script>
+
+    <!-- Theme Custom -->
+    <script src="js/custom.js"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="js/theme.init.js"></script>
 
 
-				<div class="container">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNuclBOReq4JZqa0hKki7VKjYXrrvr2RQ"></script>
+    <script>
+      /*
+            			Map Settings
 
-					<div class="row">
-						<h2>Frequently Asked <strong>Questions</strong></h2>
-					</div>
+            				Find the Latitude and Longitude of your address:
+            					- http://universimmedia.pagesperso-orange.fr/geo/loc.htm
+            					- http://www.findlatitudeandlongitude.com/find-address-from-latitude-and-longitude/
 
-					<hr>
+            			*/
 
-					<div class="row">
-						<div class="col-md-12">
+      // Map Markers
+      var mapMarkers = [{
+        address: "Tech Hub, Platform, New Station Street",
+        html: "<strong>Tech Hub, Platform</strong><br>Leeds, LS1 4JB",
+        icon: {
+          image: "img/pin.png",
+          iconsize: [26, 46],
+          iconanchor: [12, 46]
+        },
+        popup: true
+      }];
 
-							<div class="toggle toggle-primary" data-plugin-toggle>
-								<section class="toggle active">
-									<label>How long is the work placement?</label>
-									<p>The work placement is for 18 months - this covers induction, 15 months of group training followed by 3 months of supported independent learning while the candidate completes knowledge modules and prepares for their End Point Assessment.</p>
-								</section>
+      // Map Initial Location
+      var initLatitude = 53.79496;
+      var initLongitude = -1.54650;
 
-								<section class="toggle">
-									<label>Can we take more than one?</label>
-									<p>Yes, in fact we positively encourage it - especially for organisations with more than 3 or 4 developers. It is more cost effective to have two apprentices as the time taken to manage them actually decreases.</p>
-								</section>
+      // Map Extended Settings
+      var mapSettings = {
+        controls: {
+          draggable: (($.browser.mobile) ? false : true),
+          panControl: true,
+          zoomControl: true,
+          mapTypeControl: true,
+          scaleControl: true,
+          streetViewControl: true,
+          overviewMapControl: true
+        },
+        scrollwheel: false,
+        markers: mapMarkers,
+        latitude: initLatitude,
+        longitude: initLongitude,
+        zoom: 16
+      };
 
-								<section class="toggle">
-									<label>What happens at the end of the apprenticeship?</label>
-									<p>Generally apprentices stay on with their placement team in some cases they move on. We have a large network of organisations and contacts and are on hand to help. No one who has finished the placement is out of work for long.</p>
-								</section>
+      var map = $('#googlemaps').gMap(mapSettings),
+        mapRef = $('#googlemaps').data('gMap.reference');
 
-								<section class="toggle">
-									<label>How much does the training cost?</label>
-									<p>For SMEs, the training is 90% funded by teh government. The cost to business is £110 pcm for 15 months. As well as the training sessions, this also covers the selection and pre-apprenticeship training as well as support during the final section.</p>
-								</section>
+      // Map text-center At
+      var mapCenterAt = function(options, e) {
+        e.preventDefault();
+        $('#googlemaps').gMap("centerAt", options);
+      }
 
-								<section class="toggle">
-									<label>How often/where is the group training held?</label>
-									<p>Group training is twice a month, offsite at a central location or remotely via Zoom. Our main centres are below but we will be adding more as we expand regionally.</p>
-									<ul>
-										<li><a target="_blank" href="https://goo.gl/maps/PAHNXUnH2Zp">London: Happy HLtd - 9 Allie St E1</a></li>
-										<li><a target="_blank" href="https://goo.gl/maps/26MYyzmo4nv">Leeds: Futurelabs - Platform, New Station St LS1</a></li>
-										<li><a target="_blank" href="https://goo.gl/maps/5vPBxoxafzN2">Manchester: Progress Centre, M12</a></li>
-									</ul>
-								</section>
+      var mapRef = $('#googlemaps').data('gMap.reference');
 
-								<section class="toggle">
-									<label>How quickly will the apprentice be providing billable work?</label>
-									<p>Most are producing billable work within three months, some from as little as a few weeks. We structure the training to front load a good deal of billable skills but really it depends on your set up, your team and the apprentice themselves.</p>
-								</section>
+      // Styles from https://snazzymaps.com/
+      var styles = [{
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#e9e9e9"
+        }, {
+          "lightness": 17
+        }]
+      }, {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#f5f5f5"
+        }, {
+          "lightness": 20
+        }]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "#ffffff"
+        }, {
+          "lightness": 17
+        }]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [{
+          "color": "#ffffff"
+        }, {
+          "lightness": 29
+        }, {
+          "weight": 0.2
+        }]
+      }, {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#ffffff"
+        }, {
+          "lightness": 18
+        }]
+      }, {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#ffffff"
+        }, {
+          "lightness": 16
+        }]
+      }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#f5f5f5"
+        }, {
+          "lightness": 21
+        }]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#dedede"
+        }, {
+          "lightness": 21
+        }]
+      }, {
+        "elementType": "labels.text.stroke",
+        "stylers": [{
+          "visibility": "on"
+        }, {
+          "color": "#ffffff"
+        }, {
+          "lightness": 16
+        }]
+      }, {
+        "elementType": "labels.text.fill",
+        "stylers": [{
+          "saturation": 36
+        }, {
+          "color": "#333333"
+        }, {
+          "lightness": 40
+        }]
+      }, {
+        "elementType": "labels.icon",
+        "stylers": [{
+          "visibility": "off"
+        }]
+      }, {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{
+          "color": "#f2f2f2"
+        }, {
+          "lightness": 19
+        }]
+      }, {
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
+        "stylers": [{
+          "color": "#fefefe"
+        }, {
+          "lightness": 20
+        }]
+      }, {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [{
+          "color": "#fefefe"
+        }, {
+          "lightness": 17
+        }, {
+          "weight": 1.2
+        }]
+      }];
 
-								<section class="toggle">
-									<label>What do we do with them at the start?</label>
-									<p>We can help you with your initial integration and induction plans. We have a good deal of experience from previous years and will be able to help and advise you on things that have worked well in the past for other teams with similar set ups to yours.</p>
-								</section>
+      var styledMap = new google.maps.StyledMapType(styles, {
+        name: 'Styled Map'
+      });
 
-								<section class="toggle">
-									<label>What sort of contract should I give an apprentice?</label>
-									<p>We advise an 18 month fixed term contract. This can be your usual employment contract with additional stipulations with regard to the length and should also include amendments to allow for 20% of work time to be dedicated to 'off-the-job' learning and group training.</p>
-								</section>
+      mapRef.mapTypes.set('map_style', styledMap);
+      mapRef.setMapTypeId('map_style');
 
-								<section class="toggle">
-									<label>Are there loads of forms to fill out?</label>
-									<p>Of course there are (it’s a government initiative after all) however we provide you with all the paperwork prefilled with all the information we have so in most cases it is just a case of reading, confirming and signing.</p>
-								</section>
-
-								<section class="toggle">
-									<label>How much should I pay the apprentice?</label>
-									<p>On our scheme starting salaries are commonly between £9 and £18k pa dependant on experience and location. Minimum wage for the first year of an apprenticeship is just £3.30 per hour however all of the companies we work with pay at least £5 per hour. Also most companies introduce pay reviews at 3 or 6 months as the apprentice begins to produce more billable work.</p>
-								</section>
-
-								<section class="toggle">
-									<label>Is the scheme open to our existing staff?</label>
-									<p>Yes, it’s easy to add members of your existing staff to our gov subsidised training too. They will receive the same government support for funding their training as long as they do not already hold an equivalent or higher level qualification in a similar field. For example someone with a Geography degree will be funded but not someone with an HND in web development would likely not. We can however, bring individual cases to the attention of the ESFA for decision.</p>
-								</section>
-
-								<section class="toggle">
-									<label>Can we recruit our own apprentice?</label>
-									<p>Of course, and they are welcome to join the initial unfunded boot-camp free of charge. If you would like them to join the bootcamp though we would need to know ahead of time to adjust numbers.</p>
-								</section>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-				<section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="call-to-action-content">
-								<img src="/img/people/crispin120.jpg" alt="Crispin Read" class="img-responsive img-circle pull-left"/>
-								<h3>We <strong>love</strong> talking about what we do</h3>
-								<p>If you would like to have a chat with Crispin about the scheme in more detail <br>just book in a call.</p>
-							</div>
-							<div class="call-to-action-btn">
-								<a href="https://calendly.com/crispin_read/wda" target="_blank" class="btn btn-lg btn-primary">Book a call</a><span class="arrow hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft" style="top: -12px;"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-				</section>
+      // Change text-center Position
+      if ($(window).width() > 767) {
+        if ($('html[dir="rtl"]').get(0)) {
+          mapRef.panBy(250, 0);
+        } else {
+          mapRef.panBy(-250, 0);
+        }
+      }
+    </script>
 
 
-			</div>
-			<footer id="footer">
-				<div class="container">
-					<div class="row">
-						<div class="footer-ribbon">
-							<span>Get in Touch</span>
-						</div>
-						<div class="col-md-3">
-							<div class="newsletter">
-								<h4>Newsletter</h4>
-								<p>Keep up on our ever evolving curriculum, reach and technology stack. Enter your e-mail and subscribe to our newsletter.</p>
-
-								<div class="alert alert-success hidden" id="newsletterSuccess">
-									<strong>Success!</strong> You've been added to our email list.
-								</div>
-
-								<div class="alert alert-danger hidden" id="newsletterError"></div>
-
-								<form id="newsletterForm" action="php/newsletter-subscribe.php" method="POST">
-									<div class="input-group">
-										<input class="form-control" placeholder="Email Address" name="newsletterEmail" id="newsletterEmail" type="text">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit">Go!</button>
-										</span>
-									</div>
-								</form>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<h4>Additional Info</h4>
-							<ul>
-								<li><a href="/overview.html">Overview</a></li>
-								<li><a href="/drupal.html">Drupal</a></li>
-								<li><a href="/book-a-call.html">Book a call</a></li>
-								<!--<li><a href="/sitemap.xml">Sitemap</a></li>-->
-							</ul>
-						</div>
-						<div class="col-md-4">
-							<div class="contact-details">
-								<h4>Contact Us</h4>
-								<ul class="contact">
-									<li><p><i class="fa fa-map-marker"></i> <strong>Address:</strong> Futurelabs 1 Eastgate, Leeds</p></li>
-									<li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> 0113 314 3737</p></li>
-									<li><p><i class="fa fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hello@usercrunch.com">hello@usercrunch.com</a></p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-2">
-							<a href="http://wdan.uk"><img src="img/wdan-logo-wht.png" class="img-responsive" alt="Web Developer Apprentice Network Logo" /></a>
-						</div>
-					</div>
-				</div>
-				<div class="footer-copyright">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-1">
-								<a href="index.html" class="logo">
-									<img alt="User Crunch Logo" class="img-responsive" src="/img/user-crunch-wht.png">
-								</a>
-							</div>
-							<div class="col-md-7">
-								<p>© Copyright 2016. All Rights Reserved.</p>
-							</div>
-							<div class="col-md-4">
-								<nav id="sub-menu">
-									<ul>
-										<li><a href="page-faq.html">FAQ's</a></li>
-										<li><a href="sitemap.html">Sitemap</a></li>
-										<li><a href="contact-us.html">Contact</a></li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-
-		<!-- Vendor -->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/jquery.appear/jquery.appear.min.js"></script>
-		<script src="vendor/jquery.easing/jquery.easing.min.js"></script>
-		<script src="vendor/jquery-cookie/jquery-cookie.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-		<script src="vendor/common/common.min.js"></script>
-		<script src="vendor/jquery.validation/jquery.validation.min.js"></script>
-		<script src="vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
-		<script src="vendor/jquery.gmap/jquery.gmap.min.js"></script>
-		<script src="vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
-		<script src="vendor/isotope/jquery.isotope.min.js"></script>
-		<script src="vendor/owl.carousel/owl.carousel.min.js"></script>
-		<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-		<script src="vendor/vide/vide.min.js"></script>
-
-		<!-- Theme Base, Components and Settings -->
-		<script src="js/theme.js"></script>
-
-		<!-- Current Page Vendor and Views -->
-		<script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-		<script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-		<script src="vendor/circle-flip-slideshow/js/jquery.flipshow.min.js"></script>
-		<script src="js/views/view.home.js"></script>
-
-		<!-- Theme Custom -->
-		<script src="js/custom.js"></script>
-
-		<!-- Theme Initialization Files -->
-		<script src="js/theme.init.js"></script>
-
-		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.-->
+    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-			ga('create', 'UA-70315406-1', 'auto');
+			ga('create', 'UA-12345678-1', 'auto');
 			ga('send', 'pageview');
 		</script>
+		 -->
 
+      <!-- Start of HubSpot Embed Code -->
+      <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/3382723.js"></script>
+      <!-- End of HubSpot Embed Code -->
+     <!-- Start of LiveChat (www.livechatinc.com) code -->
+     <script type="text/javascript">
+     window.__lc = window.__lc || {};
+     window.__lc.license = 9763335;
+     (function() {
+       var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+       lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+     })();
+     </script>
+     <!-- End of LiveChat code -->
 
-	</body>
+</body>
+
 </html>

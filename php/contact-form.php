@@ -2,7 +2,7 @@
 /*
 Name: 			Contact Form
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
+Theme Version:	6.2.0
 */
 
 session_cache_limiter('nocache');
@@ -13,7 +13,7 @@ header('Content-type: application/json');
 require_once('php-mailer/PHPMailerAutoload.php');
 
 // Step 1 - Enter your email address below.
-$email = 'hello@usercrunch.com';
+$email = 'crispin@usercrunch.com';
 
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
 $debug = 0;
@@ -59,9 +59,9 @@ try {
 
 	$mail->AddAddress($email);	 						       // Add another recipient
 
-	$mail->AddAddress('sheena@happy.com', 'Sheena Morris');     // Add a secondary recipient
-	//$mail->AddCC('person3@domain.com', 'Person 3');          // Add a "Cc" address. 
-	//$mail->AddBCC('person4@domain.com', 'Person 4');         // Add a "Bcc" address. 
+	//$mail->AddAddress('rachel@usercrunch.com', 'Rachel');     // Add a secondary recipient
+	//$mail->AddCC('sheena@happy.com', 'Sheena');          // Add a "Cc" address.
+	//$mail->AddBCC('person4@domain.com', 'Person 4');         // Add a "Bcc" address.
 
 	$mail->SetFrom($email, $_POST['name']);
 	$mail->AddReplyTo($_POST['email'], $_POST['name']);

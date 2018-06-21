@@ -1,7 +1,7 @@
 /*
 Plugin Name: 	BrowserSelector
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
+Theme Version:	6.2.0
 */
 
 (function($) {
@@ -63,231 +63,6 @@ Version: 		4.9.1
 	$.browserSelector();
 
 })(jQuery);
-
-/*
-Plugin Name: 	waitForImages
-Written by: 	https://github.com/alexanderdickson/waitForImages
-*/
-
-/*! waitForImages jQuery Plugin - v2.1.0 - 2016-01-04
-* https://github.com/alexanderdickson/waitForImages
-* Copyright (c) 2016 Alex Dickson; Licensed MIT */
-;(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD. Register as an anonymous module.
-		define(['jquery'], factory);
-	} else if (typeof exports === 'object') {
-		// CommonJS / nodejs module
-		module.exports = factory(require('jquery'));
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-}(function ($) {
-	// Namespace all events.
-	var eventNamespace = 'waitForImages';
-
-	// CSS properties which contain references to images.
-	$.waitForImages = {
-		hasImageProperties: [
-			'backgroundImage',
-			'listStyleImage',
-			'borderImage',
-			'borderCornerImage',
-			'cursor'
-		],
-		hasImageAttributes: ['srcset']
-	};
-
-	// Custom selector to find all `img` elements with a valid `src` attribute.
-	$.expr[':']['has-src'] = function (obj) {
-		// Ensure we are dealing with an `img` element with a valid
-		// `src` attribute.
-		return $(obj).is('img[src][src!=""]');
-	};
-
-	// Custom selector to find images which are not already cached by the
-	// browser.
-	$.expr[':'].uncached = function (obj) {
-		// Ensure we are dealing with an `img` element with a valid
-		// `src` attribute.
-		if (!$(obj).is(':has-src')) {
-			return false;
-		}
-
-		return !obj.complete;
-	};
-
-	$.fn.waitForImages = function () {
-
-		var allImgsLength = 0;
-		var allImgsLoaded = 0;
-		var deferred = $.Deferred();
-
-		var finishedCallback;
-		var eachCallback;
-		var waitForAll;
-
-		// Handle options object (if passed).
-		if ($.isPlainObject(arguments[0])) {
-
-			waitForAll = arguments[0].waitForAll;
-			eachCallback = arguments[0].each;
-			finishedCallback = arguments[0].finished;
-
-		} else {
-
-			// Handle if using deferred object and only one param was passed in.
-			if (arguments.length === 1 && $.type(arguments[0]) === 'boolean') {
-				waitForAll = arguments[0];
-			} else {
-				finishedCallback = arguments[0];
-				eachCallback = arguments[1];
-				waitForAll = arguments[2];
-			}
-
-		}
-
-		// Handle missing callbacks.
-		finishedCallback = finishedCallback || $.noop;
-		eachCallback = eachCallback || $.noop;
-
-		// Convert waitForAll to Boolean
-		waitForAll = !! waitForAll;
-
-		// Ensure callbacks are functions.
-		if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
-			throw new TypeError('An invalid callback was supplied.');
-		}
-
-		this.each(function () {
-			// Build a list of all imgs, dependent on what images will
-			// be considered.
-			var obj = $(this);
-			var allImgs = [];
-			// CSS properties which may contain an image.
-			var hasImgProperties = $.waitForImages.hasImageProperties || [];
-			// Element attributes which may contain an image.
-			var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
-			// To match `url()` references.
-			// Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
-			var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
-
-			if (waitForAll) {
-
-				// Get all elements (including the original), as any one of
-				// them could have a background image.
-				obj.find('*').addBack().each(function () {
-					var element = $(this);
-
-					// If an `img` element, add it. But keep iterating in
-					// case it has a background image too.
-					if (element.is('img:has-src') &&
-						!element.is('[srcset]')) {
-						allImgs.push({
-							src: element.attr('src'),
-							element: element[0]
-						});
-					}
-
-					$.each(hasImgProperties, function (i, property) {
-						var propertyValue = element.css(property);
-						var match;
-
-						// If it doesn't contain this property, skip.
-						if (!propertyValue) {
-							return true;
-						}
-
-						// Get all url() of this element.
-						while (match = matchUrl.exec(propertyValue)) {
-							allImgs.push({
-								src: match[2],
-								element: element[0]
-							});
-						}
-					});
-
-					$.each(hasImageAttributes, function (i, attribute) {
-						var attributeValue = element.attr(attribute);
-						var attributeValues;
-
-						// If it doesn't contain this property, skip.
-						if (!attributeValue) {
-							return true;
-						}
-
-						allImgs.push({
-							src: element.attr('src'),
-							srcset: element.attr('srcset'),
-							element: element[0]
-						});
-					});
-				});
-			} else {
-				// For images only, the task is simpler.
-				obj.find('img:has-src')
-					.each(function () {
-					allImgs.push({
-						src: this.src,
-						element: this
-					});
-				});
-			}
-
-			allImgsLength = allImgs.length;
-			allImgsLoaded = 0;
-
-			// If no images found, don't bother.
-			if (allImgsLength === 0) {
-				finishedCallback.call(obj[0]);
-				deferred.resolveWith(obj[0]);
-			}
-
-			$.each(allImgs, function (i, img) {
-
-				var image = new Image();
-				var events =
-				  'load.' + eventNamespace + ' error.' + eventNamespace;
-
-				// Handle the image loading and error with the same callback.
-				$(image).one(events, function me (event) {
-					// If an error occurred with loading the image, set the
-					// third argument accordingly.
-					var eachArguments = [
-						allImgsLoaded,
-						allImgsLength,
-						event.type == 'load'
-					];
-					allImgsLoaded++;
-
-					eachCallback.apply(img.element, eachArguments);
-					deferred.notifyWith(img.element, eachArguments);
-
-					// Unbind the event listeners. I use this in addition to
-					// `one` as one of those events won't be called (either
-					// 'load' or 'error' will be called).
-					$(this).off(events, me);
-
-					if (allImgsLoaded == allImgsLength) {
-						finishedCallback.call(obj[0]);
-						deferred.resolveWith(obj[0]);
-						return false;
-					}
-
-				});
-
-				if (img.srcset) {
-					image.srcset = img.srcset;
-				}
-				image.src = img.src;
-			});
-		});
-
-		return deferred.promise();
-
-	};
-}));
 
 /*
 Plugin Name: 	Count To
@@ -376,11 +151,100 @@ Written by: 	Matt Huggins - https://github.com/mhuggins/jquery-countTo
 }(jQuery));
 
 /*
+Plugin Name: 	Visible
+Written by: 	https://github.com/customd/jquery-visible/blob/master/jquery.visible.js
+Description: 	This is a jQuery plugin which allows us to quickly check if an element is within the browsers visual viewport.
+*/
+(function($){
+
+    /**
+     * Copyright 2012, Digital Fusion
+     * Licensed under the MIT license.
+     * http://teamdf.com/jquery-plugins/license/
+     *
+     * @author Sam Sehnert
+     * @desc A small plugin that checks whether elements are within
+     *       the user visible viewport of a web browser.
+     *       only accounts for vertical position, not horizontal.
+     */
+    var $w=$(window);
+    $.fn.visible = function(partial,hidden,direction,container){
+
+        if (this.length < 1)
+            return;
+	
+	// Set direction default to 'both'.
+	direction = direction || 'both';
+	    
+        var $t          = this.length > 1 ? this.eq(0) : this,
+						isContained = typeof container !== 'undefined' && container !== null,
+						$c				  = isContained ? $(container) : $w,
+						wPosition        = isContained ? $c.position() : 0,
+            t           = $t.get(0),
+            vpWidth     = $c.outerWidth(),
+            vpHeight    = $c.outerHeight(),
+            clientSize  = hidden === true ? t.offsetWidth * t.offsetHeight : true;
+
+        if (typeof t.getBoundingClientRect === 'function'){
+
+            // Use this native browser method, if available.
+            var rec = t.getBoundingClientRect(),
+                tViz = isContained ?
+												rec.top - wPosition.top >= 0 && rec.top < vpHeight + wPosition.top :
+												rec.top >= 0 && rec.top < vpHeight,
+                bViz = isContained ?
+												rec.bottom - wPosition.top > 0 && rec.bottom <= vpHeight + wPosition.top :
+												rec.bottom > 0 && rec.bottom <= vpHeight,
+                lViz = isContained ?
+												rec.left - wPosition.left >= 0 && rec.left < vpWidth + wPosition.left - 100 :
+												rec.left >= 0 && rec.left <  vpWidth - 100,
+                rViz = isContained ?
+												rec.right - wPosition.left > 0  && rec.right < vpWidth + wPosition.left - 100  :
+												rec.right > 0 && rec.right <= vpWidth - 100,
+                vVisible   = partial ? tViz || bViz : tViz && bViz,
+                hVisible   = partial ? lViz || rViz : lViz && rViz,
+		vVisible = (rec.top < 0 && rec.bottom > vpHeight) ? true : vVisible,
+                hVisible = (rec.left < 0 && rec.right > vpWidth) ? true : hVisible;
+
+            if(direction === 'both')
+                return clientSize && vVisible && hVisible;
+            else if(direction === 'vertical')
+                return clientSize && vVisible;
+            else if(direction === 'horizontal')
+                return clientSize && hVisible;
+        } else {
+
+            var viewTop 				= isContained ? 0 : wPosition,
+                viewBottom      = viewTop + vpHeight,
+                viewLeft        = $c.scrollLeft(),
+                viewRight       = viewLeft + vpWidth,
+                position          = $t.position(),
+                _top            = position.top,
+                _bottom         = _top + $t.height(),
+                _left           = position.left,
+                _right          = _left + $t.width(),
+                compareTop      = partial === true ? _bottom : _top,
+                compareBottom   = partial === true ? _top : _bottom,
+                compareLeft     = partial === true ? _right : _left,
+                compareRight    = partial === true ? _left : _right;
+
+            if(direction === 'both')
+                return !!clientSize && ((compareBottom <= viewBottom) && (compareTop >= viewTop)) && ((compareRight <= viewRight) && (compareLeft >= viewLeft));
+            else if(direction === 'vertical')
+                return !!clientSize && ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+            else if(direction === 'horizontal')
+                return !!clientSize && ((compareRight <= viewRight) && (compareLeft >= viewLeft));
+        }
+    };
+
+})(jQuery);
+
+
+/*
 Plugin Name: 	afterResize.js
 Written by: 	https://github.com/mcshaman/afterResize.js
 Description: 	Simple jQuery plugin designed to emulate an 'after resize' event.
 */
-
 ( function( $ ) {
 	"use strict";
 	
@@ -484,7 +348,7 @@ Description: 	Simple jQuery plugin designed to emulate an 'after resize' event.
 /*
 Plugin Name: 	matchHeight
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
+Theme Version:	6.2.0
 
 Based on:
 
@@ -826,7 +690,7 @@ Based on:
 /*
 Plugin Name: 	jQuery.pin
 Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
+Theme Version:	6.2.0
 
 Based on:
 
@@ -950,745 +814,6 @@ Based on:
 })(jQuery);
 
 /*
-Plugin Name: 	smoothScroll for jQuery.
-Written by: 	Okler Themes - (http://www.okler.net)
-Version: 		4.9.1
-
-Based on:
-
-	SmoothScroll v1.4.0
-	Licensed under the terms of the MIT license.
-
-	People involved
-	 - Balazs Galambosi (maintainer)
-	 - Patrick Brunner  (original idea)
-	 - Michael Herf     (Pulse Algorithm)
-
-*/
-
-(function($) {
-	$.extend({
-
-		smoothScroll: function() {
-
-			(function () {
-			  
-			// Scroll Variables (tweakable)
-			var defaultOptions = {
-
-				// Scrolling Core
-				frameRate        : 150, // [Hz]
-				animationTime    : 360, // [ms]
-				stepSize         : 100, // [px]
-
-				// Pulse (less tweakable)
-				// ratio of "tail" to "acceleration"
-				pulseAlgorithm   : true,
-				pulseScale       : 4,
-				pulseNormalize   : 1,
-
-				// Acceleration
-				accelerationDelta : 50,  // 50
-				accelerationMax   : 3,   // 3
-
-				// Keyboard Settings
-				keyboardSupport   : true,  // option
-				arrowScroll       : 50,    // [px]
-
-				// Other
-				touchpadSupport   : false, // ignore touchpad by default
-				fixedBackground   : true, 
-				excluded          : ''    
-			};
-
-			var options = defaultOptions;
-
-
-			// Other Variables
-			var isExcluded = false;
-			var isFrame = false;
-			var direction = { x: 0, y: 0 };
-			var initDone  = false;
-			var root = document.documentElement;
-			var activeElement;
-			var observer;
-			var refreshSize;
-			var deltaBuffer = [];
-			var isMac = /^Mac/.test(navigator.platform);
-
-			var key = { left: 37, up: 38, right: 39, down: 40, spacebar: 32, 
-						pageup: 33, pagedown: 34, end: 35, home: 36 };
-
-
-			/***********************************************
-			 * INITIALIZE
-			 ***********************************************/
-
-			/**
-			 * Tests if smooth scrolling is allowed. Shuts down everything if not.
-			 */
-			function initTest() {
-				if (options.keyboardSupport) {
-					addEvent('keydown', keydown);
-				}
-			}
-
-			/**
-			 * Sets up scrolls array, determines if frames are involved.
-			 */
-			function init() {
-			  
-				if (initDone || !document.body) return;
-
-				initDone = true;
-
-				var body = document.body;
-				var html = document.documentElement;
-				var windowHeight = window.innerHeight; 
-				var scrollHeight = body.scrollHeight;
-				
-				// check compat mode for root element
-				root = (document.compatMode.indexOf('CSS') >= 0) ? html : body;
-				activeElement = body;
-				
-				initTest();
-
-				// Checks if this script is running in a frame
-				if (top != self) {
-					isFrame = true;
-				}
-
-				/**
-				 * Please duplicate this radar for a Safari fix! 
-				 * rdar://22376037
-				 * https://openradar.appspot.com/radar?id=4965070979203072
-				 * 
-				 * Only applies to Safari now, Chrome fixed it in v45:
-				 * This fixes a bug where the areas left and right to 
-				 * the content does not trigger the onmousewheel event
-				 * on some pages. e.g.: html, body { height: 100% }
-				 */
-				else if (scrollHeight > windowHeight &&
-						(body.offsetHeight <= windowHeight || 
-						 html.offsetHeight <= windowHeight)) {
-
-					var fullPageElem = document.createElement('div');
-					fullPageElem.style.cssText = 'position:absolute; z-index:-10000; ' +
-												 'top:0; left:0; right:0; height:' + 
-												  root.scrollHeight + 'px';
-					document.body.appendChild(fullPageElem);
-					
-					// DOM changed (throttled) to fix height
-					var pendingRefresh;
-					refreshSize = function () {
-						if (pendingRefresh) return; // could also be: clearTimeout(pendingRefresh);
-						pendingRefresh = setTimeout(function () {
-							if (isExcluded) return; // could be running after cleanup
-							fullPageElem.style.height = '0';
-							fullPageElem.style.height = root.scrollHeight + 'px';
-							pendingRefresh = null;
-						}, 500); // act rarely to stay fast
-					};
-			  
-					setTimeout(refreshSize, 10);
-
-					addEvent('resize', refreshSize);
-
-					// TODO: attributeFilter?
-					var config = {
-						attributes: true, 
-						childList: true, 
-						characterData: false 
-						// subtree: true
-					};
-
-					observer = new MutationObserver(refreshSize);
-					observer.observe(body, config);
-
-					if (root.offsetHeight <= windowHeight) {
-						var clearfix = document.createElement('div');   
-						clearfix.style.clear = 'both';
-						body.appendChild(clearfix);
-					}
-				}
-
-				// disable fixed background
-				if (!options.fixedBackground && !isExcluded) {
-					body.style.backgroundAttachment = 'scroll';
-					html.style.backgroundAttachment = 'scroll';
-				}
-			}
-
-			/**
-			 * Removes event listeners and other traces left on the page.
-			 */
-			function cleanup() {
-				observer && observer.disconnect();
-				removeEvent(wheelEvent, wheel);
-				removeEvent('mousedown', mousedown);
-				removeEvent('keydown', keydown);
-				removeEvent('resize', refreshSize);
-				removeEvent('load', init);
-			}
-
-
-			/************************************************
-			 * SCROLLING 
-			 ************************************************/
-			 
-			var que = [];
-			var pending = false;
-			var lastScroll = Date.now();
-
-			/**
-			 * Pushes scroll actions to the scrolling queue.
-			 */
-			function scrollArray(elem, left, top) {
-				
-				directionCheck(left, top);
-
-				if (options.accelerationMax != 1) {
-					var now = Date.now();
-					var elapsed = now - lastScroll;
-					if (elapsed < options.accelerationDelta) {
-						var factor = (1 + (50 / elapsed)) / 2;
-						if (factor > 1) {
-							factor = Math.min(factor, options.accelerationMax);
-							left *= factor;
-							top  *= factor;
-						}
-					}
-					lastScroll = Date.now();
-				}          
-				
-				// push a scroll command
-				que.push({
-					x: left, 
-					y: top, 
-					lastX: (left < 0) ? 0.99 : -0.99,
-					lastY: (top  < 0) ? 0.99 : -0.99, 
-					start: Date.now()
-				});
-					
-				// don't act if there's a pending queue
-				if (pending) {
-					return;
-				}  
-
-				var scrollWindow = (elem === document.body);
-				
-				var step = function (time) {
-					
-					var now = Date.now();
-					var scrollX = 0;
-					var scrollY = 0; 
-				
-					for (var i = 0; i < que.length; i++) {
-						
-						var item = que[i];
-						var elapsed  = now - item.start;
-						var finished = (elapsed >= options.animationTime);
-						
-						// scroll position: [0, 1]
-						var position = (finished) ? 1 : elapsed / options.animationTime;
-						
-						// easing [optional]
-						if (options.pulseAlgorithm) {
-							position = pulse(position);
-						}
-						
-						// only need the difference
-						var x = (item.x * position - item.lastX) >> 0;
-						var y = (item.y * position - item.lastY) >> 0;
-						
-						// add this to the total scrolling
-						scrollX += x;
-						scrollY += y;            
-						
-						// update last values
-						item.lastX += x;
-						item.lastY += y;
-					
-						// delete and step back if it's over
-						if (finished) {
-							que.splice(i, 1); i--;
-						}           
-					}
-
-					// scroll left and top
-					if (scrollWindow) {
-						window.scrollBy(scrollX, scrollY);
-					} 
-					else {
-						if (scrollX) elem.scrollLeft += scrollX;
-						if (scrollY) elem.scrollTop  += scrollY;                    
-					}
-					
-					// clean up if there's nothing left to do
-					if (!left && !top) {
-						que = [];
-					}
-					
-					if (que.length) { 
-						requestFrame(step, elem, (1000 / options.frameRate + 1)); 
-					} else { 
-						pending = false;
-					}
-				};
-				
-				// start a new queue of actions
-				requestFrame(step, elem, 0);
-				pending = true;
-			}
-
-
-			/***********************************************
-			 * EVENTS
-			 ***********************************************/
-
-			/**
-			 * Mouse wheel handler.
-			 * @param {Object} event
-			 */
-			function wheel(event) {
-
-				if (!initDone) {
-					init();
-				}
-				
-				var target = event.target;
-				var overflowing = overflowingAncestor(target);
-
-				// use default if there's no overflowing
-				// element or default action is prevented   
-				// or it's a zooming event with CTRL 
-				if (!overflowing || event.defaultPrevented || event.ctrlKey) {
-					return true;
-				}
-				
-				// leave embedded content alone (flash & pdf)
-				if (isNodeName(activeElement, 'embed') || 
-				   (isNodeName(target, 'embed') && /\.pdf/i.test(target.src)) ||
-				   isNodeName(activeElement, 'object')) {
-					return true;
-				}
-
-				var deltaX = -event.wheelDeltaX || event.deltaX || 0;
-				var deltaY = -event.wheelDeltaY || event.deltaY || 0;
-				
-				if (isMac) {
-					if (event.wheelDeltaX && isDivisible(event.wheelDeltaX, 120)) {
-						deltaX = -120 * (event.wheelDeltaX / Math.abs(event.wheelDeltaX));
-					}
-					if (event.wheelDeltaY && isDivisible(event.wheelDeltaY, 120)) {
-						deltaY = -120 * (event.wheelDeltaY / Math.abs(event.wheelDeltaY));
-					}
-				}
-				
-				// use wheelDelta if deltaX/Y is not available
-				if (!deltaX && !deltaY) {
-					deltaY = -event.wheelDelta || 0;
-				}
-
-				// line based scrolling (Firefox mostly)
-				if (event.deltaMode === 1) {
-					deltaX *= 40;
-					deltaY *= 40;
-				}
-				
-				// check if it's a touchpad scroll that should be ignored
-				if (!options.touchpadSupport && isTouchpad(deltaY)) {
-					return true;
-				}
-
-				// scale by step size
-				// delta is 120 most of the time
-				// synaptics seems to send 1 sometimes
-				if (Math.abs(deltaX) > 1.2) {
-					deltaX *= options.stepSize / 120;
-				}
-				if (Math.abs(deltaY) > 1.2) {
-					deltaY *= options.stepSize / 120;
-				}
-				
-				scrollArray(overflowing, deltaX, deltaY);
-				event.preventDefault();
-				scheduleClearCache();
-			}
-
-			/**
-			 * Keydown event handler.
-			 * @param {Object} event
-			 */
-			function keydown(event) {
-
-				var target   = event.target;
-				var modifier = event.ctrlKey || event.altKey || event.metaKey || 
-							  (event.shiftKey && event.keyCode !== key.spacebar);
-				
-				// our own tracked active element could've been removed from the DOM
-				if (!document.contains(activeElement)) {
-					activeElement = document.activeElement;
-				}
-
-				// do nothing if user is editing text
-				// or using a modifier key (except shift)
-				// or in a dropdown
-				// or inside interactive elements
-				var inputNodeNames = /^(textarea|select|embed|object)$/i;
-				var buttonTypes = /^(button|submit|radio|checkbox|file|color|image)$/i;
-				if ( inputNodeNames.test(target.nodeName) ||
-					 isNodeName(target, 'input') && !buttonTypes.test(target.type) ||
-					 isNodeName(activeElement, 'video') ||
-					 isInsideYoutubeVideo(event) ||
-					 target.isContentEditable || 
-					 event.defaultPrevented   ||
-					 modifier ) {
-				  return true;
-				}
-				
-				// spacebar should trigger button press
-				if ((isNodeName(target, 'button') ||
-					 isNodeName(target, 'input') && buttonTypes.test(target.type)) &&
-					event.keyCode === key.spacebar) {
-				  return true;
-				}
-				
-				var shift, x = 0, y = 0;
-				var elem = overflowingAncestor(activeElement);
-				var clientHeight = elem.clientHeight;
-
-				if (elem == document.body) {
-					clientHeight = window.innerHeight;
-				}
-
-				switch (event.keyCode) {
-					case key.up:
-						y = -options.arrowScroll;
-						break;
-					case key.down:
-						y = options.arrowScroll;
-						break;         
-					case key.spacebar: // (+ shift)
-						shift = event.shiftKey ? 1 : -1;
-						y = -shift * clientHeight * 0.9;
-						break;
-					case key.pageup:
-						y = -clientHeight * 0.9;
-						break;
-					case key.pagedown:
-						y = clientHeight * 0.9;
-						break;
-					case key.home:
-						y = -elem.scrollTop;
-						break;
-					case key.end:
-						var damt = elem.scrollHeight - elem.scrollTop - clientHeight;
-						y = (damt > 0) ? damt+10 : 0;
-						break;
-					case key.left:
-						x = -options.arrowScroll;
-						break;
-					case key.right:
-						x = options.arrowScroll;
-						break;            
-					default:
-						return true; // a key we don't care about
-				}
-
-				scrollArray(elem, x, y);
-				event.preventDefault();
-				scheduleClearCache();
-			}
-
-			/**
-			 * Mousedown event only for updating activeElement
-			 */
-			function mousedown(event) {
-				activeElement = event.target;
-			}
-
-
-			/***********************************************
-			 * OVERFLOW
-			 ***********************************************/
-
-			var uniqueID = (function () {
-				var i = 0;
-				return function (el) {
-					return el.uniqueID || (el.uniqueID = i++);
-				};
-			})();
-
-			var cache = {}; // cleared out after a scrolling session
-			var clearCacheTimer;
-
-			//setInterval(function () { cache = {}; }, 10 * 1000);
-
-			function scheduleClearCache() {
-				clearTimeout(clearCacheTimer);
-				clearCacheTimer = setInterval(function () { cache = {}; }, 1*1000);
-			}
-
-			function setCache(elems, overflowing) {
-				for (var i = elems.length; i--;)
-					cache[uniqueID(elems[i])] = overflowing;
-				return overflowing;
-			}
-
-			//  (body)                (root)
-			//         | hidden | visible | scroll |  auto  |
-			// hidden  |   no   |    no   |   YES  |   YES  |
-			// visible |   no   |   YES   |   YES  |   YES  |
-			// scroll  |   no   |   YES   |   YES  |   YES  |
-			// auto    |   no   |   YES   |   YES  |   YES  |
-
-			function overflowingAncestor(el) {
-				var elems = [];
-				var body = document.body;
-				var rootScrollHeight = root.scrollHeight;
-				do {
-					var cached = cache[uniqueID(el)];
-					if (cached) {
-						return setCache(elems, cached);
-					}
-					elems.push(el);
-					if (rootScrollHeight === el.scrollHeight) {
-						var topOverflowsNotHidden = overflowNotHidden(root) && overflowNotHidden(body);
-						var isOverflowCSS = topOverflowsNotHidden || overflowAutoOrScroll(root);
-						if (isFrame && isContentOverflowing(root) || 
-						   !isFrame && isOverflowCSS) {
-							return setCache(elems, getScrollRoot()); 
-						}
-					} else if (isContentOverflowing(el) && overflowAutoOrScroll(el)) {
-						return setCache(elems, el);
-					}
-				} while (el = el.parentElement);
-			}
-
-			function isContentOverflowing(el) {
-				return (el.clientHeight + 10 < el.scrollHeight);
-			}
-
-			// typically for <body> and <html>
-			function overflowNotHidden(el) {
-				var overflow = getComputedStyle(el, '').getPropertyValue('overflow-y');
-				return (overflow !== 'hidden');
-			}
-
-			// for all other elements
-			function overflowAutoOrScroll(el) {
-				var overflow = getComputedStyle(el, '').getPropertyValue('overflow-y');
-				return (overflow === 'scroll' || overflow === 'auto');
-			}
-
-
-			/***********************************************
-			 * HELPERS
-			 ***********************************************/
-
-			function addEvent(type, fn) {
-				window.addEventListener(type, fn, false);
-			}
-
-			function removeEvent(type, fn) {
-				window.removeEventListener(type, fn, false);  
-			}
-
-			function isNodeName(el, tag) {
-				return (el.nodeName||'').toLowerCase() === tag.toLowerCase();
-			}
-
-			function directionCheck(x, y) {
-				x = (x > 0) ? 1 : -1;
-				y = (y > 0) ? 1 : -1;
-				if (direction.x !== x || direction.y !== y) {
-					direction.x = x;
-					direction.y = y;
-					que = [];
-					lastScroll = 0;
-				}
-			}
-
-			var deltaBufferTimer;
-
-			if (window.localStorage && localStorage.SS_deltaBuffer) {
-				deltaBuffer = localStorage.SS_deltaBuffer.split(',');
-			}
-
-			function isTouchpad(deltaY) {
-				if (!deltaY) return;
-				if (!deltaBuffer.length) {
-					deltaBuffer = [deltaY, deltaY, deltaY];
-				}
-				deltaY = Math.abs(deltaY)
-				deltaBuffer.push(deltaY);
-				deltaBuffer.shift();
-				clearTimeout(deltaBufferTimer);
-				deltaBufferTimer = setTimeout(function () {
-					if (window.localStorage) {
-						localStorage.SS_deltaBuffer = deltaBuffer.join(',');
-					}
-				}, 1000);
-				return !allDeltasDivisableBy(120) && !allDeltasDivisableBy(100);
-			} 
-
-			function isDivisible(n, divisor) {
-				return (Math.floor(n / divisor) == n / divisor);
-			}
-
-			function allDeltasDivisableBy(divisor) {
-				return (isDivisible(deltaBuffer[0], divisor) &&
-						isDivisible(deltaBuffer[1], divisor) &&
-						isDivisible(deltaBuffer[2], divisor));
-			}
-
-			function isInsideYoutubeVideo(event) {
-				var elem = event.target;
-				var isControl = false;
-				if (document.URL.indexOf ('www.youtube.com/watch') != -1) {
-					do {
-						isControl = (elem.classList && 
-									 elem.classList.contains('html5-video-controls'));
-						if (isControl) break;
-					} while (elem = elem.parentNode);
-				}
-				return isControl;
-			}
-
-			var requestFrame = (function () {
-				  return (window.requestAnimationFrame       || 
-						  window.webkitRequestAnimationFrame || 
-						  window.mozRequestAnimationFrame    ||
-						  function (callback, element, delay) {
-							 window.setTimeout(callback, delay || (1000/60));
-						 });
-			})();
-
-			var MutationObserver = (window.MutationObserver || 
-									window.WebKitMutationObserver ||
-									window.MozMutationObserver);  
-
-			var getScrollRoot = (function() {
-			  var SCROLL_ROOT;
-			  return function() {
-				if (!SCROLL_ROOT) {
-				  var dummy = document.createElement('div');
-				  dummy.style.cssText = 'height:10000px;width:1px;';
-				  document.body.appendChild(dummy);
-				  var bodyScrollTop  = document.body.scrollTop;
-				  var docElScrollTop = document.documentElement.scrollTop;
-				  window.scrollBy(0, 1);
-				  if (document.body.scrollTop != bodyScrollTop)
-					(SCROLL_ROOT = document.body);
-				  else 
-					(SCROLL_ROOT = document.documentElement);
-				  window.scrollBy(0, -1);
-				  document.body.removeChild(dummy);
-				}
-				return SCROLL_ROOT;
-			  };
-			})();
-
-
-			/***********************************************
-			 * PULSE (by Michael Herf)
-			 ***********************************************/
-			 
-			/**
-			 * Viscous fluid with a pulse for part and decay for the rest.
-			 * - Applies a fixed force over an interval (a damped acceleration), and
-			 * - Lets the exponential bleed away the velocity over a longer interval
-			 * - Michael Herf, http://stereopsis.com/stopping/
-			 */
-			function pulse_(x) {
-				var val, start, expx;
-				// test
-				x = x * options.pulseScale;
-				if (x < 1) { // acceleartion
-					val = x - (1 - Math.exp(-x));
-				} else {     // tail
-					// the previous animation ended here:
-					start = Math.exp(-1);
-					// simple viscous drag
-					x -= 1;
-					expx = 1 - Math.exp(-x);
-					val = start + (expx * (1 - start));
-				}
-				return val * options.pulseNormalize;
-			}
-
-			function pulse(x) {
-				if (x >= 1) return 1;
-				if (x <= 0) return 0;
-
-				if (options.pulseNormalize == 1) {
-					options.pulseNormalize /= pulse_(1);
-				}
-				return pulse_(x);
-			}
-
-
-			/***********************************************
-			 * FIRST RUN
-			 ***********************************************/
-
-			var userAgent = window.navigator.userAgent;
-			var isEdge    = /Edge/.test(userAgent); // thank you MS
-			var isChrome  = /chrome/i.test(userAgent) && !isEdge; 
-			var isSafari  = /safari/i.test(userAgent) && !isEdge; 
-			var isMobile  = /mobile/i.test(userAgent);
-			var isEnabledForBrowser = (isChrome || isSafari) && !isMobile;
-
-			var wheelEvent;
-			if ('onwheel' in document.createElement('div'))
-				wheelEvent = 'wheel';
-			else if ('onmousewheel' in document.createElement('div'))
-				wheelEvent = 'mousewheel';
-
-			if (wheelEvent && isEnabledForBrowser) {
-				addEvent(wheelEvent, wheel);
-				addEvent('mousedown', mousedown);
-				addEvent('load', init);
-			}
-
-
-			/***********************************************
-			 * PUBLIC INTERFACE
-			 ***********************************************/
-
-			function SmoothScroll(optionsToSet) {
-				for (var key in optionsToSet)
-					if (defaultOptions.hasOwnProperty(key)) 
-						options[key] = optionsToSet[key];
-			}
-			SmoothScroll.destroy = cleanup;
-
-			if (window.SmoothScrollOptions) // async API
-				SmoothScroll(window.SmoothScrollOptions)
-
-			if (typeof define === 'function' && define.amd)
-				define(function() {
-					return SmoothScroll;
-				});
-			else if ('object' == typeof exports)
-				module.exports = SmoothScroll;
-			else
-				window.SmoothScroll = SmoothScroll;
-
-			})();
-
-		}
-
-	});
-
-	if (!$('html').hasClass('disable-smooth-scroll')) {
-		$.smoothScroll();
-	}
-
-})(jQuery);
-
-/*
 Browser Workarounds
 */
 if (/iPad|iPhone|iPod/.test(navigator.platform)) {
@@ -1698,3 +823,446 @@ if (/iPad|iPhone|iPod/.test(navigator.platform)) {
 		$('.thumb-info').attr('onclick', 'return true');
 	});
 }
+
+/* jQuery-FontSpy.js v3.0.0
+ * https://github.com/patrickmarabeas/jQuery-FontSpy.js
+ *
+ * Copyright 2013, Patrick Marabeas http://pulse-dev.com
+ * Released under the MIT license
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * Date: 02/11/2015
+ */
+
+(function( w, $ ) {
+
+  fontSpy = function  ( fontName, conf ) {
+	var $html = $('html'),
+		$body = $('body'),
+		fontFamilyName = fontName;
+
+		// Throw error if fontName is not a string or not is left as an empty string
+		if (typeof fontFamilyName !== 'string' || fontFamilyName === '') {
+		  throw 'A valid fontName is required. fontName must be a string and must not be an empty string.';
+		}
+
+	var defaults = {
+		font: fontFamilyName,
+		fontClass: fontFamilyName.toLowerCase().replace( /\s/g, '' ),
+		success: function() {},
+		failure: function() {},
+		testFont: 'Courier New',
+		testString: 'QW@HhsXJ',
+		glyphs: '',
+		delay: 50,
+		timeOut: 1000,
+		callback: $.noop
+	};
+
+	var config = $.extend( defaults, conf );
+
+	var $tester = $('<span>' + config.testString+config.glyphs + '</span>')
+		.css('position', 'absolute')
+		.css('top', '-9999px')
+		.css('left', '-9999px')
+		.css('visibility', 'hidden')
+		.css('fontFamily', config.testFont)
+		.css('fontSize', '250px');
+
+	$body.append($tester);
+
+	var fallbackFontWidth = $tester.outerWidth();
+
+	$tester.css('fontFamily', config.font + ',' + config.testFont);
+
+	var failure = function () {
+	  $html.addClass("no-"+config.fontClass);
+	  if( config && config.failure ) {
+		config.failure();
+	  }
+	  config.callback(new Error('FontSpy timeout'));
+	  $tester.remove();
+	};
+
+	var success = function () {
+	  config.callback();
+	  $html.addClass(config.fontClass);
+	  if( config && config.success ) {
+		config.success();
+	  }
+	  $tester.remove();
+	};
+
+	var retry = function () {
+	  setTimeout(checkFont, config.delay);
+	  config.timeOut = config.timeOut - config.delay;
+	};
+
+	var checkFont = function () {
+	  var loadedFontWidth = $tester.outerWidth();
+
+	  if (fallbackFontWidth !== loadedFontWidth){
+		success();
+	  } else if(config.timeOut < 0) {
+		failure();
+	  } else {
+		retry();
+	  }
+	}
+
+	checkFont();
+	}
+  })( this, jQuery );
+
+/* waitForImages jQuery Plugin - v2.4.0 - 2018-02-13
+ * https://github.com/alexanderdickson/waitForImages
+ *
+ * Copyright (c) 2016 Alex Dickson; Licensed MIT
+ */
+;(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // CommonJS / nodejs module
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
+    // Namespace all events.
+    var eventNamespace = 'waitForImages';
+
+    // Is srcset supported by this browser?
+    var hasSrcset = (function(img) {
+        return img.srcset && img.sizes;
+    })(new Image());
+
+    // CSS properties which contain references to images.
+    $.waitForImages = {
+        hasImageProperties: [
+            'backgroundImage',
+            'listStyleImage',
+            'borderImage',
+            'borderCornerImage',
+            'cursor'
+        ],
+        hasImageAttributes: ['srcset']
+    };
+
+    // Custom selector to find all `img` elements with a valid `src` attribute.
+    $.expr.pseudos['has-src'] = function (obj) {
+        // Ensure we are dealing with an `img` element with a valid
+        // `src` attribute.
+        return $(obj).is('img[src][src!=""]');
+    };
+
+    // Custom selector to find images which are not already cached by the
+    // browser.
+    $.expr.pseudos.uncached = function (obj) {
+        // Ensure we are dealing with an `img` element with a valid
+        // `src` attribute.
+        if (!$(obj).is(':has-src')) {
+            return false;
+        }
+
+        return !obj.complete;
+    };
+
+    $.fn.waitForImages = function () {
+
+        var allImgsLength = 0;
+        var allImgsLoaded = 0;
+        var deferred = $.Deferred();
+        var originalCollection = this;
+        var allImgs = [];
+
+        // CSS properties which may contain an image.
+        var hasImgProperties = $.waitForImages.hasImageProperties || [];
+        // Element attributes which may contain an image.
+        var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
+        // To match `url()` references.
+        // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
+        var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
+
+        var finishedCallback;
+        var eachCallback;
+        var waitForAll;
+
+        // Handle options object (if passed).
+        if ($.isPlainObject(arguments[0])) {
+
+            waitForAll = arguments[0].waitForAll;
+            eachCallback = arguments[0].each;
+            finishedCallback = arguments[0].finished;
+
+        } else {
+
+            // Handle if using deferred object and only one param was passed in.
+            if (arguments.length === 1 && $.type(arguments[0]) === 'boolean') {
+                waitForAll = arguments[0];
+            } else {
+                finishedCallback = arguments[0];
+                eachCallback = arguments[1];
+                waitForAll = arguments[2];
+            }
+
+        }
+
+        // Handle missing callbacks.
+        finishedCallback = finishedCallback || $.noop;
+        eachCallback = eachCallback || $.noop;
+
+        // Convert waitForAll to Boolean.
+        waitForAll = !! waitForAll;
+
+        // Ensure callbacks are functions.
+        if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
+            throw new TypeError('An invalid callback was supplied.');
+        }
+
+        this.each(function () {
+            // Build a list of all imgs, dependent on what images will
+            // be considered.
+            var obj = $(this);
+
+            if (waitForAll) {
+
+                // Get all elements (including the original), as any one of
+                // them could have a background image.
+                obj.find('*').addBack().each(function () {
+                    var element = $(this);
+
+                    // If an `img` element, add it. But keep iterating in
+                    // case it has a background image too.
+                    if (element.is('img:has-src') &&
+                        !element.is('[srcset]')) {
+                        allImgs.push({
+                            src: element.attr('src'),
+                            element: element[0]
+                        });
+                    }
+
+                    $.each(hasImgProperties, function (i, property) {
+                        var propertyValue = element.css(property);
+                        var match;
+
+                        // If it doesn't contain this property, skip.
+                        if (!propertyValue) {
+                            return true;
+                        }
+
+                        // Get all url() of this element.
+                        while (match = matchUrl.exec(propertyValue)) {
+                            allImgs.push({
+                                src: match[2],
+                                element: element[0]
+                            });
+                        }
+                    });
+
+                    $.each(hasImageAttributes, function (i, attribute) {
+                        var attributeValue = element.attr(attribute);
+                        var attributeValues;
+
+                        // If it doesn't contain this property, skip.
+                        if (!attributeValue) {
+                            return true;
+                        }
+
+                        allImgs.push({
+                            src: element.attr('src'),
+                            srcset: element.attr('srcset'),
+                            element: element[0]
+                        });
+                    });
+                });
+            } else {
+                // For images only, the task is simpler.
+                obj.find('img:has-src')
+                    .each(function () {
+                    allImgs.push({
+                        src: this.src,
+                        element: this
+                    });
+                });
+            }
+        });
+
+        allImgsLength = allImgs.length;
+        allImgsLoaded = 0;
+
+        // If no images found, don't bother.
+        if (allImgsLength === 0) {
+            finishedCallback.call(originalCollection);
+            deferred.resolveWith(originalCollection);
+        }
+
+        // Now that we've found all imgs in all elements in this,
+        // load them and attach callbacks.
+        $.each(allImgs, function (i, img) {
+
+            var image = new Image();
+            var events =
+              'load.' + eventNamespace + ' error.' + eventNamespace;
+
+            // Handle the image loading and error with the same callback.
+            $(image).one(events, function me (event) {
+                // If an error occurred with loading the image, set the
+                // third argument accordingly.
+                var eachArguments = [
+                    allImgsLoaded,
+                    allImgsLength,
+                    event.type == 'load'
+                ];
+                allImgsLoaded++;
+
+                eachCallback.apply(img.element, eachArguments);
+                deferred.notifyWith(img.element, eachArguments);
+
+                // Unbind the event listeners. I use this in addition to
+                // `one` as one of those events won't be called (either
+                // 'load' or 'error' will be called).
+                $(this).off(events, me);
+
+                if (allImgsLoaded == allImgsLength) {
+                    finishedCallback.call(originalCollection[0]);
+                    deferred.resolveWith(originalCollection[0]);
+                    return false;
+                }
+
+            });
+
+            if (hasSrcset && img.srcset) {
+                image.srcset = img.srcset;
+                image.sizes = img.sizes;
+            }
+            image.src = img.src;
+        });
+
+        return deferred.promise();
+
+    };
+}));
+
+// Tooltip and Popover
+(function($) {
+	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="popover"]').popover();
+})(jQuery);
+
+// Tabs
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+	$(this).parents('.nav-tabs').find('.active').removeClass('active');
+	$(this).addClass('active').parent().addClass('active');
+});
+
+// On Load Scroll
+if( !$('html').hasClass('disable-onload-scroll') && window.location.hash ) {
+
+	window.scrollTo(0, 0);
+
+	$(window).on('load', function() {
+		setTimeout(function() {
+
+			var target = window.location.hash,
+				offset = ( $(window).width() < 768 ) ? 180 : 90;
+
+			$('body').addClass('scrolling');
+
+			$('html, body').animate({
+				scrollTop: $(target).offset().top - offset
+			}, 600, 'easeOutQuad', function() {
+				$('body').removeClass('scrolling');
+			});
+
+		}, 1);
+	});
+}
+
+/*
+* Footer Reveal
+*/
+(function($) {
+	var $footerReveal = {
+		$wrapper: $('.footer-reveal'),
+		init: function() {
+			var self = this;
+
+			self.build();
+			self.events();
+		},
+		build: function() {
+			var self = this, 
+				footer_height = self.$wrapper.outerHeight(true),
+				window_height = ( $(window).height() - $('.header-body').height() );
+
+			if( footer_height > window_height ) {
+				$('#footer').removeClass('footer-reveal');
+				$('.main').css('margin-bottom', 0);
+			} else {
+				$('#footer').addClass('footer-reveal');
+				$('.main').css('margin-bottom', footer_height);
+			}
+
+		},
+		events: function() {
+			var self = this,
+				$window = $(window);
+
+			$window.on('load', function(){
+				$window.afterResize(function(){
+					self.build();
+				});
+			});
+		}
+	}
+
+	if( $('.footer-reveal').get(0) ) {
+		$footerReveal.init();
+	}
+})(jQuery);
+
+/*
+* Notice Top bar
+*/
+(function($) {
+	var $noticeTopBar = {
+		$wrapper: $('.notice-top-bar'),
+		$body: $('.body'),
+		init: function() {
+			var self = this;
+
+			self.build();
+		},
+		build: function(){
+			var self = this;
+
+			$(window).on('load', function(){
+				setTimeout(function(){
+					self.$body.css({
+						'margin-top': self.$wrapper.outerHeight(),
+						'transition': 'ease margin 300ms'
+					});
+				}, 1000);
+			});
+		}
+	}
+
+	if( $('.notice-top-bar').get(0) ) {
+		$noticeTopBar.init();
+	}
+})(jQuery);
+
+/*
+* Notice Top bar
+*/
+(function($) {
+	$('.close-theme-switcher-bar').on('click', function(){
+		$(this).closest('.header-top').css({
+			height: 0,
+			overflow: 'hidden'
+		})
+	});
+})(jQuery);

@@ -1,20 +1,20 @@
 Simple line icons
 ====
-
+[![Build Status](https://travis-ci.org/thesabbir/simple-line-icons.svg?branch=master)](https://travis-ci.org/thesabbir/simple-line-icons)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/thesabbir/simple-line-icons?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Simple line icons with CSS, SAAS, LESS & Web-fonts files.
+Simple line icons with CSS, SASS, LESS & Web-fonts files.
 
 Preview & Docs
 ===
-[https://thesabbir.github.io/simple-line-icons](https://thesabbir.github.io/simple-line-icons)
+[http://simplelineicons.com](http://simplelineicons.com)
 
 
 Installation
 ====
 via [cdnjs](http://cdnjs.com/libraries/simple-line-icons)
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 ```
 via [bower](http://bower.io/search/?q=simple-line-icons)
 
@@ -33,6 +33,8 @@ npm install simple-line-icons --save
 
 Or, you can also clone or [download this repository](https://github.com/thesabbir/simple-line-icons/archive/master.zip) as zip.
 
+
+If you are a designers you can use [this creative cloud library](http://adobe.ly/2bQ48wl).
 
 Customizing LESS/SASS variables
 ====

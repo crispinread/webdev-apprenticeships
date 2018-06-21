@@ -1,25 +1,30 @@
 /********************************************
- * REVOLUTION 5.2.6 EXTENSION - PARALLAX
- * @version: 1.5 (23.06.2016)
+ * REVOLUTION 5.4.6.4 EXTENSION - PARALLAX
+ * @version: 2.2.3 (17.05.2017)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile();
+	_ISM = _R.is_mobile(),
+	extension = {	alias:"Parallax Min JS",
+					name:"revolution.extensions.parallax.min.js",
+					min_core: "5.4.5",
+					version:"2.2.3"
+			  };
 
 jQuery.extend(true,_R, {	
 	
-	checkForParallax : function(container,opt) {
-
-		
+	checkForParallax : function(container,opt) {		
+		if (_R.compare_version(extension).check==="stop") return false;
 		var _ = opt.parallax;
 
 		if (_.done) return;
 		_.done = true;
 
 		if (_ISM && _.disable_onmobile=="on") return false;
+
 
 		if (_.type=="3D" || _.type=="3d") {			
 			punchgs.TweenLite.set(opt.c,{overflow:_.ddd_overflow});
@@ -59,7 +64,7 @@ jQuery.extend(true,_R, {
 			setDDDInContainer(jQuery(this));						
 		});
 
-		if (_.type=="3D" || _.type=="3d" && opt.c.find('.tp-static-layers').length>0) {
+		if ((_.type=="3D" || _.type=="3d") && opt.c.find('.tp-static-layers').length>0) {
 			punchgs.TweenLite.set(opt.c.find('.tp-static-layers'),{top:0, left:0,width:"100%",height:"100%"});
 			setDDDInContainer(opt.c.find('.tp-static-layers'));
 		}
@@ -179,7 +184,7 @@ jQuery.extend(true,_R, {
 							else 								
 								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 						else 
-							punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
+							punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 																	
 						if (event.type=="mouseleave")
 						 	punchgs.TweenLite.to(jQuery(this),3.8,{z:0, ease:punchgs.Power3.easeOut});
@@ -228,7 +233,7 @@ jQuery.extend(true,_R, {
 						if (opt.sliderType==="carousel") sctor = ".tp-revslider-slidesli .dddwrapper, .tp-revslider-slidesli .dddwrapper-layer, .tp-static-layers .dddwrapper-layer";
 						opt.c.find(sctor).each(function() {			
 							var t = jQuery(this),
-								pl = _.levels[_.levels.length-1]/200
+								pl = _.levels[_.levels.length-1]/200,
 								offsh =	diffh * pl,
 								offsv =	diffv * pl*3,
 								offrv = opt.conw == 0 ? 0 :  Math.round((diffh / opt.conw * pl)*500) || 0,
@@ -253,7 +258,7 @@ jQuery.extend(true,_R, {
 								else 								
 									punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
 							else 
-								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, z:0,ease:punchgs.Power3.easeOut,overwrite:"all"});
+								punchgs.TweenLite.to(t,0.5,{force3D:"auto",rotationY:0,z:0,x:0,y:0, rotationX:0, ease:punchgs.Power3.easeOut,overwrite:"all"});
 																	
 							if (event.type=="mouseleave")
 							 	punchgs.TweenLite.to(jQuery(this),3.8,{z:0, ease:punchgs.Power3.easeOut});
@@ -262,8 +267,23 @@ jQuery.extend(true,_R, {
 				}			 
 		}
 				
+		// COLLECT ALL ELEMENTS WHICH NEED FADE IN/OUT ON PARALLAX SCROLL
+		var _s = opt.scrolleffect;
+		_s.bgs = new Array();		
+
+		if (_s.on) {		
+			if (_s.on_slidebg==="on")
+				for (var i=0;i<opt.allslotholder.length;i++) {													
+					_s.bgs.push(opt.allslotholder[i]);
+				}
+								
+			_s.multiplicator_layers = parseFloat(_s.multiplicator_layers);
+			_s.multiplicator = parseFloat(_s.multiplicator);	
+		}
+		if (_s.layers!==undefined && _s.layers.length===0) _s.layers = false;
+		if (_s.bgs!==undefined && _s.bgs.length===0) _s.bgs = false;	
+
 		_R.scrollTicker(opt,container);
-		
 
 	},
 	
@@ -294,9 +314,9 @@ jQuery.extend(true,_R, {
 
 
 	//	-	SET POST OF SCROLL PARALLAX	-
-	scrollHandling : function(opt,fromMouse) {	
+	scrollHandling : function(opt,fromMouse,speedoverwrite) {	
 		opt.lastwindowheight = opt.lastwindowheight || window.innerHeight;
-		
+		opt.conh = opt.conh===0 || opt.conh===undefined ? opt.infullscreenmode ? opt.minHeight : opt.c.height() : opt.conh;
 		if (opt.lastscrolltop==window.scrollY && !opt.duringslidechange && !fromMouse) return false;		
 		punchgs.TweenLite.delayedCall(0.2,saveLastScroll,[opt,window.scrollY]);
 
@@ -330,7 +350,7 @@ jQuery.extend(true,_R, {
 				}
 			}
 		}
-			
+					
 		// SCROLL BASED PARALLAX EFFECT 
 		if (_ISM && _.disable_onmobile=="on") return false;
 
@@ -341,20 +361,95 @@ jQuery.extend(true,_R, {
 						if (_.pcontainers[i].length>0) {
 							var pc = _.pcontainers[i],
 								pl = _.pcontainer_depths[i]/100,						
-								offsv = Math.round((proc * -(pl*opt.conh)*10))/10 || 0;										
+								offsv = Math.round((proc * -(pl*opt.conh)*10))/10 || 0,
+								s = speedoverwrite!==undefined ? speedoverwrite :  _.speedls/1000 || 0;
 							pc.data('parallaxoffset',offsv);		
-							punchgs.TweenLite.set(pc,{overwrite:"auto",force3D:"auto",y:offsv})
+							punchgs.TweenLite.to(pc,s,{overwrite:"auto",force3D:"auto",y:offsv})
 						}
-					}									
+					}											
 			if (_.bgcontainers)
 				for (var i=0;i<_.bgcontainers.length;i++) {
 					var t = _.bgcontainers[i],
 						l = _.bgcontainer_depths[i],			
-						offsv =	proc * -(l*opt.conh) || 0;							
-					punchgs.TweenLite.set(t,{position:"absolute",top:"0px",left:"0px",backfaceVisibility:"hidden",force3D:"true",y:offsv+"px"});
-					
-				}			
+						offsv =	proc * -(l*opt.conh) || 0,
+						s = speedoverwrite!==undefined ? speedoverwrite : _.speedbg/1000 || 0;	
+
+					punchgs.TweenLite.to(t,s,{position:"absolute",top:"0px",left:"0px",backfaceVisibility:"hidden",force3D:"true",y:offsv+"px"});											
+				}							
 		}
+
+		// SCROLL BASED BLUR,FADE,GRAYSCALE EFFECT
+		var _s = opt.scrolleffect;
+		if (_s.on && (_s.disable_on_mobile!=="on" || !_ISM)) { 
+			
+			var _fproc = Math.abs(proc)-(_s.tilt/100);
+			_fproc = _fproc<0 ? 0 : _fproc;			
+			if (_s.layers!==false) {									
+				var fadelevel = 1 - (_fproc *_s.multiplicator_layers),
+					seo = { backfaceVisibility:"hidden",force3D:"true",z:0.001,perspective:600};
+				if (_s.direction=="top" && proc>=0) fadelevel=1;
+				if (_s.direction=="bottom" && proc<=0) fadelevel=1;
+				fadelevel = fadelevel>1 ? 1 : fadelevel < 0 ? 0 : fadelevel;	
+								
+
+				if (_s.fade==="on")
+					seo.opacity = fadelevel;
+
+				if (_s.scale==="on") {					
+					var scalelevel = (fadelevel);
+					seo.scale = 1+(1-scalelevel);	
+					
+				}
+
+				if (_s.blur==="on") {					
+					var blurlevel = (1-fadelevel) * _s.maxblur;
+					seo['-webkit-filter'] = 'blur('+blurlevel+'px)';
+					seo['filter'] = 'blur('+blurlevel+'px)';
+				}
+
+				
+				if (_s.grayscale==="on") {					
+					var graylevel = (1-fadelevel) * 100,
+						gf = 'grayscale('+graylevel+'%)';
+					seo['-webkit-filter'] = seo['-webkit-filter']===undefined ? gf : seo['-webkit-filter']+' '+gf;
+					seo['filter'] = seo['filter']===undefined ? gf: seo['filter']+' '+gf;
+				}				
+				punchgs.TweenLite.set(_s.layers,seo);    								
+			}
+
+			if (_s.bgs!==false) {									
+				var fadelevel = 1 - (_fproc *_s.multiplicator),
+					seo = { backfaceVisibility:"hidden",force3D:"true"};
+				if (_s.direction=="top" && proc>=0) fadelevel=1;
+				if (_s.direction=="bottom" && proc<=0) fadelevel=1;					
+				fadelevel = fadelevel>1 ? 1 : fadelevel < 0 ? 0 : fadelevel;
+
+				if (_s.fade==="on")
+					seo.opacity = fadelevel;
+
+				if (_s.scale==="on") {					
+					var scalelevel = fadelevel;
+					//seo.scale = scalelevel;
+					punchgs.TweenLite.set(jQuery('.tp-kbimg-wrap'),{transformOrigin:"50% 50%",scale:scalelevel,force3D:true})
+				}
+
+				if (_s.blur==="on") {					
+					var blurlevel = (1-fadelevel) * _s.maxblur;
+					seo['-webkit-filter'] = 'blur('+blurlevel+'px)';
+					seo['filter'] = 'blur('+blurlevel+'px)';
+				}
+
+				
+				if (_s.grayscale==="on") {					
+					var graylevel = (1-fadelevel) * 100,
+						gf = 'grayscale('+graylevel+'%)';
+					seo['-webkit-filter'] = seo['-webkit-filter']===undefined ? gf : seo['-webkit-filter']+' '+gf;
+					seo['filter'] = seo['filter']===undefined ? gf: seo['filter']+' '+gf;
+				}
+
+				punchgs.TweenLite.set(_s.bgs,seo);    								
+			}
+		}		
 		
 		if (_R.callBackHandling)
 			_R.callBackHandling(opt,"parallax","end");		

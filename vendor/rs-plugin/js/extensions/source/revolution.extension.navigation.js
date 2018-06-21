@@ -1,13 +1,18 @@
 /********************************************
- * REVOLUTION 5.2 EXTENSION - NAVIGATION
- * @version: 1.2.4 (10.03.2016)
+ * REVOLUTION 5.4.6.4 EXTENSION - NAVIGATION
+ * @version: 1.3.5 (06.04.2017)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
 (function($) {
-
+"use strict";
 var _R = jQuery.fn.revolution,
-	_ISM = _R.is_mobile();
+	_ISM = _R.is_mobile(),
+	extension = {	alias:"Navigation Min JS",
+					name:"revolution.extensions.navigation.min.js",
+					min_core: "5.4.0",
+					version:"1.3.5"
+			  };
 
 
 ///////////////////////////////////////////
@@ -98,6 +103,7 @@ jQuery.extend(true,_R, {
 	// PUT NAVIGATION IN POSITION AND MAKE SURE THUMBS AND TABS SHOWING TO THE RIGHT POSITION
 	manageNavigation : function(opt) {
 		
+
 		
 		var	lof = _R.getHorizontalOffset(opt.c.parent(),"left"),
 			rof = _R.getHorizontalOffset(opt.c.parent(),"right");
@@ -142,7 +148,7 @@ jQuery.extend(true,_R, {
 
 	// MANAGE THE NAVIGATION
 	 createNavigation : function(container,opt) {
-
+	 	if (_R.compare_version(extension).check==="stop") return false;
 		var cp = container.parent(),		
 			_a = opt.navigation.arrows, _b = opt.navigation.bullets, _c = opt.navigation.thumbnails, _d = opt.navigation.tabs,
 			a = ckNO(_a), b = ckNO(_b), c = ckNO(_c), d = ckNO(_d);
@@ -224,10 +230,11 @@ jQuery.extend(true,_R, {
 			
 			if (_a.enable === true) {
 				var inst = _a.tmp;
-
-				jQuery.each(opt.thumbs[pi].params,function(i,obj) {
-					inst = inst.replace(obj.from,obj.to);
-				});	
+				if (opt.thumbs[pi]!=undefined) {
+					jQuery.each(opt.thumbs[pi].params,function(i,obj) {
+						inst = inst.replace(obj.from,obj.to);
+					});	
+				}
 				_a.left.j.html(inst);
 				inst = _a.tmp;
 				if (ni>opt.slideamount) return;
@@ -235,8 +242,14 @@ jQuery.extend(true,_R, {
 					inst = inst.replace(obj.from,obj.to);
 				});	
 				_a.right.j.html(inst);
-				punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});
-				punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});			
+				
+				if (!_a.rtl) {				
+					punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});
+					punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});			
+				} else {
+					punchgs.TweenLite.set(_a.left.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[ni].src+")"});
+					punchgs.TweenLite.set(_a.right.j.find('.tp-arr-imgholder'),{backgroundImage:"url("+opt.thumbs[pi].src+")"});			
+				}
 			}
 
 			
@@ -284,7 +297,9 @@ jQuery.extend(true,_R, {
 		if (c) swipeAction(cp.find('.tp-thumbs'),opt);
 		if (d) swipeAction(cp.find('.tp-tabs'),opt);
 		if (opt.sliderType==="carousel") swipeAction(container,opt,true);
-		if (opt.navigation.touch.touchenabled=="on") swipeAction(container,opt,"swipebased");
+		if ((opt.navigation.touch.touchOnDesktop==="on") || (opt.navigation.touch.touchenabled=="on" && _ISM)) swipeAction(container,opt,"swipebased");
+		
+		
 	}
 
 });
@@ -428,12 +443,12 @@ var initKeyboard = function(container,opt) {
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 39) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==40)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 0;
-			_R.callingNewSlide(opt,container,1);					
+			_R.callingNewSlide(container,1);					
 		}
 		if ((opt.navigation.keyboard_direction=="horizontal" && e.keyCode == 37) || (opt.navigation.keyboard_direction=="vertical" && e.keyCode==38)) {
 			opt.sc_indicator="arrow";
 			opt.sc_indicator_dir = 1;
-			_R.callingNewSlide(opt,container,-1);									
+			_R.callingNewSlide(container,-1);									
 		}
 	});		
 };
@@ -462,6 +477,8 @@ var initMouseScroll = function(container,opt) {
 				ret = true;
 			if (opt.navigation.mouseScrollNavigation=="carousel") 
 				fs = ls = false;								
+		
+
 		if (psi==-1) {				
 
 			if(res.pixelY<bl) {
@@ -469,16 +486,16 @@ var initMouseScroll = function(container,opt) {
 				if (!fs) {					
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					} 
 					ret = false;
 				}
 				if (!ls) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					}					
 					ret = false;			 
 				}
@@ -488,16 +505,16 @@ var initMouseScroll = function(container,opt) {
 			 	if (!ls) {			 					 		
 				 	opt.sc_indicator="arrow";
 				 	if (opt.navigation.mouseScrollReverse!=="reverse") {
-						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,container,1);	
+						opt.sc_indicator_dir = 0;
+						_R.callingNewSlide(container,1);	
 					} 				
 					ret = false;
 				}
 				if (!fs) {
 					opt.sc_indicator="arrow";
 					if (opt.navigation.mouseScrollReverse==="reverse") {
-						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,container,-1);	
+						opt.sc_indicator_dir = 1;
+						_R.callingNewSlide(container,-1);	
 					}		
 					ret = false;
 				}
@@ -537,13 +554,17 @@ var isme = function (a,c,e) {
 };
 
 // 	-	SET THE SWIPE FUNCTION //	
+
+
 var swipeAction = function(container,opt,vertical) {	
 		
-	container.data('opt',opt);
+	//container[0].opt = opt;
 
 	// TOUCH ENABLED SCROLL
 	var _ = opt.carousel;
 	jQuery(".bullet, .bullets, .tp-bullets, .tparrows").addClass("noSwipe");
+		
+
 	
 	_.Limit = "endless";			
 	var notonbody =  _ISM || _R.get_browser()==="Firefox",
@@ -572,22 +593,27 @@ var swipeAction = function(container,opt,vertical) {
 		swipeStatus:function(event,phase,direction,distance,duration,fingerCount,fingerData) {			
 					
 
+			
+
 			var withinslider = isme('rev_slider_wrapper',container,event),
 				withinthumbs =  isme('tp-thumbs',container,event),
 				withintabs =  isme('tp-tabs',container,event),
 				starget = jQuery(this).attr('class'),
 				istt = starget.match(/tp-tabs|tp-thumb/gi) ? true : false;
 								
-
+			
 				
 			// SWIPE OVER SLIDER, TO SWIPE SLIDES IN CAROUSEL MODE
 			if (opt.sliderType==="carousel" && 
 				(((phase==="move" || phase==="end" || phase=="cancel") &&  (opt.dragStartedOverSlider && !opt.dragStartedOverThumbs && !opt.dragStartedOverTabs))
 				 || (phase==="start" && withinslider>0 && withinthumbs===0 && withintabs===0))) {				
-									
+				
+				if (_ISM && (direction ==="up" || direction==="down")) return;
+			
 				opt.dragStartedOverSlider = true;
 				distance = (direction && direction.match(/left|up/g)) ?  Math.round(distance * -1) : distance = Math.round(distance * 1);
 				
+
 				switch (phase) {
 					case "start":								
 						if (_.positionanim!==undefined) {											
@@ -596,10 +622,11 @@ var swipeAction = function(container,opt,vertical) {
 						}
 						_.overpull = "none";																						
 						_.wrap.addClass("dragged");		
+						
 					break;
 					case "move":	
 										
-
+							opt.c.find('.tp-withaction').addClass("tp-temporarydisabled");
 							_.slide_offset = _.infinity==="off" ? _.slide_globaloffset + distance : _R.simp(_.slide_globaloffset + distance, _.maxwidth);
 							
 							if (_.infinity==="off") {
@@ -625,7 +652,10 @@ var swipeAction = function(container,opt,vertical) {
 							_R.carouselToEvalPosition(opt,direction);							
 							opt.dragStartedOverSlider = false;
 							opt.dragStartedOverThumbs = false;
-							opt.dragStartedOverTabs = false;																									
+							opt.dragStartedOverTabs = false;	
+							setTimeout(function() {
+								opt.c.find('.tp-withaction').removeClass("tp-temporarydisabled");							
+							},19);
 					break;
 				}
 			}  else
@@ -723,12 +753,12 @@ var swipeAction = function(container,opt,vertical) {
 					
 					if ((swipe_wait_dir=="horizontal" && direction == "left") || (swipe_wait_dir=="vertical" && direction == "up")) {
 						opt.sc_indicator_dir = 0;
-						_R.callingNewSlide(opt,opt.c,1);
+						_R.callingNewSlide(opt.c,1);
 						return false;
 					}
 					if ((swipe_wait_dir=="horizontal" && direction == "right") || (swipe_wait_dir=="vertical" && direction == "down")) {
 						opt.sc_indicator_dir = 1;
-						_R.callingNewSlide(opt,opt.c,-1);	
+						_R.callingNewSlide(opt.c,-1);	
 						return false;
 					}
 
@@ -1077,8 +1107,8 @@ var addThumb = function(container,o,li,what,opt) {
 		_margin = (o.position === "outer-top" || o.position==="outer-bottom") && (o.h_align==="center") ? "auto" : "0";
 	
 
-	tm.css({maxWidth:maxw+"px",maxHeight:maxh+"px",overflow:"hidden",position:"relative"});		
-	t.css({maxWidth:(maxw)+"px",/*margin:_margin, */maxHeight:maxh+"px",overflow:"visible",position:position,background:cHex(o.wrapper_color,o.wrapper_opacity),padding:o.wrapper_padding+"px",boxSizing:"contet-box"});
+	tm.css({maxWidth:maxw+"px",maxHeight:maxh+"px",overflow:"hidden",position:"relative"});			
+	t.css({maxWidth:(maxw)+"px",/*margin:_margin, */maxHeight:maxh+"px",overflow:"visible",position:position,background:o.wrapper_color,padding:o.wrapper_padding+"px",boxSizing:"contet-box"});
 
 	
 	

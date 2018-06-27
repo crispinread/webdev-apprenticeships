@@ -43,3 +43,10 @@ h1.page-title {
   margin: 0;
   padding:0;
 }
+
+.curriculum i{
+  font-size: 500%;
+  text-align: center;
+  margin-bottom: 10px;
+
+}

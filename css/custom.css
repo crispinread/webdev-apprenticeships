@@ -22,7 +22,8 @@
     left: auto;
     right: 25px;
 }
-.balloon-photo i{
+.balloon-photo i,
+.about-title .icon{
   font-size: 60px
 }
 

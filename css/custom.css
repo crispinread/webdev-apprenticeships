@@ -7,6 +7,9 @@
 .call-to-action .call-to-action-content{
   width: 78%;
 }
+.call-to-action .btn{
+  margin: auto;
+}
 .img-circle {
     border-radius: 50%;
 }

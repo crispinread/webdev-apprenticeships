@@ -16,7 +16,7 @@ require_once('php-mailer/PHPMailerAutoload.php');
 $email = 'crispin@usercrunch.com';
 
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
-$debug = 2;
+$debug = 0;
 
 $subject = $_POST['subject'];
 

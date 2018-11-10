@@ -13,7 +13,7 @@ header('Content-type: application/json');
 require_once('php-mailer/PHPMailerAutoload.php');
 
 // Step 1 - Enter your email address below.
-$email = 'crispin@usercrunch.com';
+$email = 'no-reply@webdevapprentice.uk';
 
 // If the e-mail is not working, change the debug option to 2 | $debug = 2;
 $debug = 0;
@@ -30,8 +30,8 @@ $fields = array(
 		'val' => $_POST['email']
 	),
 	2 => array(
-		'text' => 'Message',
-		'val' => $_POST['message']
+		'text' => 'Company',
+		'val' => $_POST['company']
 	)
 );
 

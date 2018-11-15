@@ -79,3 +79,15 @@ h1.page-title {
     position: relative;
     padding: 80px 0 0 !important;
 }
+.lead-list li{
+  margin-bottom: 32px;
+}
+
+.intro-img{
+  width: 90%
+}
+
+a.highlight{
+  font-weight: bold;
+  text-decoration: underline;
+}

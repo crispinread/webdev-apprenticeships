@@ -1,10 +1,10 @@
 /************************************************
- * REVOLUTION 5.4.6.4 EXTENSION - LAYER ANIMATION
- * @version: 3.6.5 (08.03.2018)
+ * REVOLUTION 5.4.6.5 EXTENSION - LAYER ANIMATION
+ * @version: 3.6.5 (10.06.2018)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 ************************************************/
-(function($) {
+;(function($) {
 	"use strict";
 
 var _R = jQuery.fn.revolution,
@@ -344,8 +344,8 @@ jQuery.extend(true,_R, {
 			internrecall = obj.recall,						
 			preset = obj.preset,
 			rtl = jQuery('body').hasClass("rtl"),
-			datas
-
+			datas;
+		
 		_._pw = _._pw===undefined ? _nc.closest('.tp-parallax-wrap') : _._pw;
 		_._lw = _._lw===undefined ? _nc.closest('.tp-loop-wrap') : _._lw;
 		_._mw = _._mw===undefined ? _nc.closest('.tp-mask-wrap') : _._mw;

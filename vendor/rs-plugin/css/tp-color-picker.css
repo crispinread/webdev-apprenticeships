@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /*
-	Default Picker Widget
+  Default Picker Widget
 */
 .rev-colorpicker {
 	
@@ -224,10 +224,10 @@
 	
 	display: inline-block;
 	position: absolute;
-		top: 19px;
-		left: 370px;
-		bottom: 5px;
-		color: #FFF;
+    top: 19px;
+    left: 370px;
+    bottom: 5px;
+    color: #FFF;
 	cursor: move;
 	
 }
@@ -704,7 +704,7 @@
 
 }
 
-.rev-cpicker-color.selected	{
+.rev-cpicker-color.selected  {
 	
 	border: 2px solid #252525;
 	cursor: auto;
@@ -847,7 +847,7 @@
 	
 }
 
-#rev-cpicker-section-right	.rev-cpicker-fields {
+#rev-cpicker-section-right  .rev-cpicker-fields {
 	
 	position: absolute;
 	width: 100%;
@@ -916,7 +916,7 @@
 	
 }
 
-.rev-cpicker-point	{
+.rev-cpicker-point  {
 	
 	position: absolute;
 	display: block;
@@ -1264,15 +1264,15 @@
 #rev-cpicker-scroller {
 	
 	display: inline-block;
-		position: relative;
-		vertical-align: top;
-		top: 16px;
+    position: relative;
+    vertical-align: top;
+    top: 16px;
 	left: -14px;
 	height: 191px;
 	border-radius: 4px;
 	box-sizing: border-box;
 	box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
-		background: url(../images/tpcolorpicker/trans_tile.png);
+    background: url(../images/tpcolorpicker/trans_tile.png);
 	
 }
 
@@ -1294,47 +1294,47 @@
 #rev-cpicker-scroller .iris-slider-offset {
 	
 	position: absolute;
-		top: 11px;
-		left: 0;
-		right: 0;
-		bottom: -3px;
-		width: auto;
-		height: auto;
-		background: transparent;
-		border: 0;
-		border-radius: 0;
+    top: 11px;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    width: auto;
+    height: auto;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
 	
 }
 
 #rev-cpicker-scroller .ui-slider-handle {
 	
 	position: absolute;
-		background: 0 0;
-		margin: 0;
-		right: -3px;
-		left: -3px;
-		border: 4px solid #aaa;
-		border-width: 4px 3px;
-		width: auto;
-		height: 6px;
-		border-radius: 4px;
-		box-shadow: 0 1px 2px rgba(0,0,0,.2);
-		opacity: .9;
-		z-index: 5;
-		cursor: ns-resize;
+    background: 0 0;
+    margin: 0;
+    right: -3px;
+    left: -3px;
+    border: 4px solid #aaa;
+    border-width: 4px 3px;
+    width: auto;
+    height: 6px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    opacity: .9;
+    z-index: 5;
+    cursor: ns-resize;
 	
 }
 
 #rev-cpicker-scroller .ui-slider-handle:before {
 	
 	content: " ";
-		position: absolute;
-		left: -2px;
-		right: -2px;
-		top: -3px;
-		bottom: -3px;
-		border: 2px solid #fff;
-		border-radius: 3px;
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: -3px;
+    bottom: -3px;
+    border: 2px solid #fff;
+    border-radius: 3px;
 	
 }
 

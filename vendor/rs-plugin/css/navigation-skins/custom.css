@@ -1,12 +1,12 @@
 /*-----------------------------------------------------------------------------
 
-- Revolution Slider 5.0 Navigatin Skin Style	-
+- Revolution Slider 5.0 Navigatin Skin Style  -
 
  CUSTOM SKIN
 
-author:	ThemePunch
-email:			info@themepunch.com
-website:		http://www.themepunch.com
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
 -----------------------------------------------------------------------------*/
 /* ARROWS */
 .custom.tparrows {
@@ -57,7 +57,7 @@ website:		http://www.themepunch.com
 	height:12px;
 	position:absolute;
 	background:#aaa;
-		background:rgba(125,125,125,0.5);
+    background:rgba(125,125,125,0.5);
 	cursor: pointer;
 	box-sizing:content-box;
 }

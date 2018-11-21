@@ -1,12 +1,12 @@
 /*-----------------------------------------------------------------------------
 
-- Revolution Slider 5.0 Navigatin Skin Style	-
+- Revolution Slider 5.0 Navigatin Skin Style  -
 
  PERSEPHONE SKIN
 
-author:	ThemePunch
-email:			info@themepunch.com
-website:		http://www.themepunch.com
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
 -----------------------------------------------------------------------------*/
 /* ARROWS */
 .persephone.tparrows {
@@ -18,7 +18,7 @@ website:		http://www.themepunch.com
 	position:absolute;
 	display:block;
 	z-index:100;
-	border:1px solid #f5f5f5;
+  border:1px solid #f5f5f5;
 }
 .persephone.tparrows:hover {
 	background:#333;

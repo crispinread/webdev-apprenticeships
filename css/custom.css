@@ -1,4 +1,8 @@
 /* Add here all your CSS customizations */
+.rev_slider li.tp-revslider-slidesli{
+  text-align: center;
+}
+
 .partners img{
   width: 70%;
   margin: 0 auto 2em;

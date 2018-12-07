@@ -79,7 +79,7 @@
 <body data-spy="scroll" data-target=".wrapper-spy" data-offset="100" class="upskill">
 
   <div class="body">
-    <header id="header" >
+		<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAtElement': '#header', 'stickySetTop': '0', 'stickyChangeLogo': false}">
       <div class="header-body">
         <div class="header-container container-fluid px-0">
           <div class="header-row">
@@ -97,13 +97,13 @@
                     <nav class="wrapper-spy collapse">
                       <ul class="nav nav-pills" id="mainNav">
                         <li>
-                          <a class="nav-link " href="#what-we-are" data-hash>
-															About us
+                          <a class="nav-link" href="#intro" data-hash data-hash-offset="32">
+															Intro
 														</a>
                         </li>
                         <li>
-                          <a class="nav-link active" href="#what-we-do" data-hash data-hash-offset="32">
-															What we do
+                          <a class="nav-link" href="#what-we-are" data-hash data-hash-offset="32">
+															About us
 														</a>
                         </li>
                         <li>
@@ -162,17 +162,127 @@
     </header>
 
     <div role="main" class="main">
+			<div class="slider-container rev_slider_wrapper" style="height: 1000px;">
+				<div id="revolutionSlider" class="slider rev_slider" data-version="5.4.7" data-plugin-revolution-slider data-plugin-options="{'sliderLayout': 'fullscreen', 'fullScreenOffsetContainer': '', 'fullScreenOffset': '0', 'responsiveLevels': [4096,1200,992,500]}">
+					<ul>
+						<li data-transition="fade">
+							<img src="img/photos/bootcamp.jpg"
+								alt=""
+								data-bgposition="center center"
+								data-bgfit="cover"
+								data-bgrepeat="no-repeat"
+								class="rev-slidebg">
+
+							<div class="rs-background-video-layer"
+								data-forcerewind="on"
+								data-volume="mute"
+								data-videowidth="100%"
+								data-videoheight="100%"
+								data-ytid="agrHTsFUXBc"
+								data-videopreload="preload"
+								data-videoloop="loop"
+								data-volume="mute"
+								data-forceCover="1"
+								data-aspectratio="16:9"
+								data-autoplay="true"
+								data-autoplayonlyfirsttime="false"
+								data-nextslideatend="true"
+								data-videoattributes="version=3&enablejsapi=1&html5=1&hd=1&wmode=opaque&showinfo=0&rel=0&
+			 origin=http://webdevapprentice.uk"
+							></div>
+
+
+							<!--<div class="tp-caption"
+								data-x="center" data-hoffset="['-165','-165','-165','-215']"
+								data-y="center" data-voffset="['-110','-110','-110','-135']"
+								data-start="1000"
+								style="z-index: 5"
+								data-transform_in="x:[-300%];opacity:0;s:500;"
+								data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png" alt=""></div>-->
+
+							<div class="tp-caption text-color-light font-weight-normal"
+								data-x="center"
+								data-y="center" data-voffset="['-160','-160','-160','-185']"
+								data-start="700"
+								style="z-index: 5"
+								data-fontsize="['22','22','22','40']"
+								data-lineheight="['25','25','25','45']"
+								data-transform_in="y:[-50%];opacity:0;s:500;">Don't Waste Your Levy</div>
+
+							<!--<div class="tp-caption"
+								data-x="center" data-hoffset="['165','165','165','215']"
+								data-y="center" data-voffset="['-110','-110','-110','-135']"
+								data-start="1000"
+								style="z-index: 5"
+								data-transform_in="x:[300%];opacity:0;s:500;"
+								data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png" alt=""></div>-->
+							<h1 class="tp-caption font-weight-extra-bold text-color-light negative-ls-2"
+								data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center"
+								style="z-index: 5"
+								data-y="center" data-voffset="['-80','-80','-80','-60']"
+								data-fontsize="['50','50','50','90']"
+								data-lineheight="['55','55','55','95']">Hire a Trainee <br>Web Developer</h1>
+
+							<div class="tp-caption font-weight-light text-center"
+								data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2000,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+								data-x="center"
+								style="z-index: 5"
+								data-y="center" data-voffset="['0','0','0','100']"
+								data-fontsize="['18','18','18','50']"
+								data-lineheight="['29','29','29','40']"
+								style="color: #b5b5b5;">Expert training tailored to your business needs </div>
+
+							<a class="tp-caption btn btn-light font-weight-bold text-color-primary"
+								href="#intro"
+								data-hash data-hash-offset="32"
+								data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center" data-hoffset="['-120','-120','-120','-195']"
+								data-y="center" data-voffset="['65','65','65','210']"
+								style="z-index: 5"
+								data-paddingtop="['15','15','15','30']"
+								data-paddingbottom="['15','15','15','30']"
+								data-paddingleft="['33','33','33','50']"
+								data-paddingright="['33','33','33','50']"
+								data-fontsize="['13','13','13','25']"
+								data-lineheight="['20','20','20','25']">Find out more <i class="fas fa-chevron-down"></i></a>
+
+							<a class="tp-caption btn btn-primary font-weight-bold"
+								href="https://calendly.com/crispin_read/wda/12-04-2018"
+								data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center" data-hoffset="['90','90','90','165']"
+								data-y="center" data-voffset="['65','65','65','210']"
+								data-paddingtop="['15','15','15','30']"
+								style="z-index: 5"
+								data-paddingbottom="['15','15','15','30']"
+								data-paddingleft="['33','33','33','50']"
+								data-paddingright="['33','33','33','50']"
+								data-fontsize="['13','13','13','25']"
+								data-lineheight="['20','20','20','25']"><i class="fas fa-phone"></i> Book a call</a>
+
+
+
+
+
+
+							<div class="tp-dottedoverlay tp-opacity-overlay"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
 
 
 			      <section id="intro" class="section section-no-border background-color-light m-0">
 			        <div class="container">
 			          <div class="row text-center">
 			            <div class="col">
-			              <h1 class="page-title">Don't Waste your Levy - Get a Trainee Web Developer</h1>
+			              <h1 class="page-title">You've already paid into the apprentceship levy - so let's make it work for you</h1>
 
 				              <p class="lead">
-												Use the levy to bolster your team by taking on one of our web developer apprentices.
+												Bolster your team by taking on one of our web developer apprentices. All will have passed our rigorous selection process and code boot-camp. We are sure they will prove to be an asset to your team.
 											</p>
+											<p>To be notified of our next intake in your area please get in touch at the link below.</p>
+											<p><a class="typeform-share link btn btn-primary font-weight-bold" href="https://happyltd.typeform.com/to/eXkwqE" data-mode="popup" >Register Interest</a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script></p>
 											<hr>
 									</div>
 								</div>
@@ -192,27 +302,6 @@
 									</div>
 								</div>
 			      </section>
-						<section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer">
-							<div class="container">
-								<div class="row">
-									<div class="col">
-										<h3>Want to know more about how this could work for your Web Dev team?</h3>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-6 col-md-2">
-											<img src="https://webdevapprentice.uk/img/team/crispin120.jpg" alt="Crispin Read" class="img-responsive img-circle pull-left" />
-									</div>
-									<div class="col-6 ">
-											<p>Speak to our lead trainer Crispin now</p>
-									</div>
-									<div class="col-12 col-md-4">
-											<a href="https://calendly.com/crispin_read/wda" target="_blank" class="btn btn-lg btn-primary">Book a call</a><span class="arrow hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft"
-												style="top: -12px;"></span>
-									</div>
-								</div>
-							</div>
-						</section>
 
 						<section class="parallax section section-text-light section-parallax section-center" data-plugin-parallax="" data-plugin-options="{'speed': 1.5}" data-image-src="https://webdevapprentice.uk/img/photos/bootcamp-texture.jpg" style="position: relative; overflow: hidden;"><div class="parallax-background" style="background-image: url(&quot;img/photos/bootcamp-texture.jpg&quot;); background-size: cover; position: absolute; top: 0px; left: 0px; width: 100%; height: 180%; transform: translate3d(0px, -144.857px, 0px); background-position-x: 50%;"></div>
 								<div class="container">
@@ -461,78 +550,7 @@
 			                    </div>
 			                  </section>
 
-												<section id="testimonials" class="section section-no-border background-color-quaternary m-0">
-									        <div class="container">
-									          <div class="row text-center">
-									            <div class="col">
-									              <h2>Testimonials</h2>
-									              <p class="custom-section-sub-title">From past employers</p>
-									            </div>
-									          </div>
-									          <div class="row justify-content-center">
-									            <div class="col">
-									              <div class="owl-carousel mb-0" data-plugin-options="{'items': 1, 'loop': true, 'dots': true, 'nav': true}">
-									                <div class="row justify-content-center">
-									                  <div class="col-lg-8">
-									                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
-									                      <blockquote>
-									                        <p>The scheme is one of the very best. The assessment process, pre-start boot-camp and knowledgeable trainers mean we get engaged, motivated apprentices contributing to our business from day one.</p>
-									                      </blockquote>
-									                      <div class="testimonial-author">
-									                        <p>
-									                          <strong class="font-weight-semibold">Mark Hope | Digital Director - Access</strong>
-									                        </p>
-									                      </div>
-									                    </div>
-									                  </div>
-									                </div>
-										                <div class="row justify-content-center">
-										                  <div class="col-lg-8">
-										                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
-										                      <blockquote>
-										                        <p>Happy made the process of taking on an Apprentice a joy. We were very impressed by the pre-apprentice training they provided and the calibre of the candidates themselves. We would not hesitate to recommend them.</p>
-										                      </blockquote>
-										                      <div class="testimonial-author">
-										                        <p>
-										                          <strong class="font-weight-semibold">Ben Colchester | MD - Bonsai Tiger</strong>
-										                        </p>
-										                      </div>
-										                    </div>
-										                  </div>
-										                </div>
-											                <div class="row justify-content-center">
-											                  <div class="col-lg-8">
-											                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
-																						<blockquote>
-											                        <p>An antidote to resource scarcity in our industry, the Drupal Apprenticeship scheme creates the right environment for those just embarking upon a career in development to realise their true potential.</p>
-											                      </blockquote>
-											                      <div class="testimonial-author">
-											                        <p>
-											                          <strong class="font-weight-semibold">Paul Johnson | Drupal Director - CTI</strong>
-											                        </p>
-											                      </div>
-											                    </div>
-											                  </div>
-											                </div>
-									                <div class="row justify-content-center">
-									                  <div class="col-lg-8">
-									                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0 ">
-									                      <blockquote>
-									                        <p>Taking on an apprentice has been fantastic experience. We have an excellent new team member, and have been really well supported all the way.</p>
-									                      </blockquote>
-									                      <div class="testimonial-author">
-									                        <p>
-									                          <strong class="font-weight-semibold">Jon Stutfield | CEO - Bliss</strong>
-									                        </p>
-									                      </div>
-									                    </div>
-									                  </div>
-									                </div>
-									              </div>
-									            </div>
-									          </div>
-									        </div>
-									      </section>
+
 
 
 															      <section class="section curriculum text-center section-no-border background-color-light m-0">
@@ -605,6 +623,101 @@
 															        </div>
 															      </section>
 
+
+												<section class="call-to-action call-to-action-default with-button-arrow call-to-action-in-footer">
+													<div class="container">
+														<div class="row">
+															<div class="col">
+																<h3>Want to know more about how this could benefit your team?</h3>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-6 col-md-2">
+																	<img src="https://webdevapprentice.uk/img/team/crispin120.jpg" alt="Crispin Read" class="img-responsive img-circle pull-left" />
+															</div>
+															<div class="col-6 ">
+																	<p>Speak to our lead trainer Crispin now</p>
+															</div>
+															<div class="col-12 col-md-4">
+																	<a href="https://calendly.com/crispin_read/wda" target="_blank" class="btn btn-lg btn-primary">Book a call</a><span class="arrow hlb hidden-xs hidden-sm hidden-md appear-animation animated rotateInUpLeft appear-animation-visible" data-appear-animation="rotateInUpLeft"
+																		style="top: -12px;"></span>
+															</div>
+														</div>
+													</div>
+												</section>
+
+																								<section id="testimonials" class="section section-no-border background-color-quaternary m-0">
+																					        <div class="container">
+																					          <div class="row text-center">
+																					            <div class="col">
+																					              <h2>Testimonials</h2>
+																					              <p class="custom-section-sub-title">From past employers</p>
+																					            </div>
+																					          </div>
+																					          <div class="row justify-content-center">
+																					            <div class="col">
+																					              <div class="owl-carousel mb-0" data-plugin-options="{'items': 1, 'loop': true, 'dots': true, 'nav': true}">
+																					                <div class="row justify-content-center">
+																					                  <div class="col-lg-8">
+																					                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
+																					                      <blockquote>
+																					                        <p>The scheme is one of the very best. The assessment process, pre-start boot-camp and knowledgeable trainers mean we get engaged, motivated apprentices contributing to our business from day one.</p>
+																					                      </blockquote>
+																					                      <div class="testimonial-author">
+																					                        <p>
+																					                          <strong class="font-weight-semibold">Mark Hope | Digital Director - Access</strong>
+																					                        </p>
+																					                      </div>
+																					                    </div>
+																					                  </div>
+																					                </div>
+																						                <div class="row justify-content-center">
+																						                  <div class="col-lg-8">
+																						                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
+																						                      <blockquote>
+																						                        <p>Happy made the process of taking on an Apprentice a joy. We were very impressed by the pre-apprentice training they provided and the calibre of the candidates themselves. We would not hesitate to recommend them.</p>
+																						                      </blockquote>
+																						                      <div class="testimonial-author">
+																						                        <p>
+																						                          <strong class="font-weight-semibold">Ben Colchester | MD - Bonsai Tiger</strong>
+																						                        </p>
+																						                      </div>
+																						                    </div>
+																						                  </div>
+																						                </div>
+																							                <div class="row justify-content-center">
+																							                  <div class="col-lg-8">
+																							                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0">
+																																		<blockquote>
+																							                        <p>An antidote to resource scarcity in our industry, the Drupal Apprenticeship scheme creates the right environment for those just embarking upon a career in development to realise their true potential.</p>
+																							                      </blockquote>
+																							                      <div class="testimonial-author">
+																							                        <p>
+																							                          <strong class="font-weight-semibold">Paul Johnson | Drupal Director - CTI</strong>
+																							                        </p>
+																							                      </div>
+																							                    </div>
+																							                  </div>
+																							                </div>
+																					                <div class="row justify-content-center">
+																					                  <div class="col-lg-8">
+																					                    <div class="testimonial testimonial-with-quotes testimonial-style-2 custom-testimonial-style-1 text-center mb-0 ">
+																					                      <blockquote>
+																					                        <p>Taking on an apprentice has been fantastic experience. We have an excellent new team member, and have been really well supported all the way.</p>
+																					                      </blockquote>
+																					                      <div class="testimonial-author">
+																					                        <p>
+																					                          <strong class="font-weight-semibold">Jon Stutfield | CEO - Bliss</strong>
+																					                        </p>
+																					                      </div>
+																					                    </div>
+																					                  </div>
+																					                </div>
+																					              </div>
+																					            </div>
+																					          </div>
+																					        </div>
+																					      </section>
 
       <!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
       <div id="googlemaps" class="google-map m-0 custom-contact-pos"></div>

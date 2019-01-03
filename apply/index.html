@@ -79,7 +79,7 @@
 <body data-spy="scroll" data-target=".wrapper-spy" data-offset="100" class="upskill">
 
   <div class="body">
-    <header id="header" >
+		<header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAtElement': '#header', 'stickySetTop': '0', 'stickyChangeLogo': false}">
       <div class="header-body">
         <div class="header-container container-fluid px-0">
           <div class="header-row">
@@ -145,6 +145,117 @@
         </div>
       </div>
     </header>
+
+
+    <div role="main" class="main">
+			<div class="slider-container rev_slider_wrapper" style="height: 1000px;">
+				<div id="revolutionSlider" class="slider rev_slider" data-version="5.4.7" data-plugin-revolution-slider data-plugin-options="{'sliderLayout': 'fullscreen', 'fullScreenOffsetContainer': '', 'fullScreenOffset': '0', 'responsiveLevels': [4096,1200,992,500]}">
+					<ul>
+						<li data-transition="fade">
+							<img src="img/photos/bootcamp.jpg"
+								alt=""
+								data-bgposition="center center"
+								data-bgfit="cover"
+								data-bgrepeat="no-repeat"
+								class="rev-slidebg">
+
+							<div class="rs-background-video-layer"
+								data-forcerewind="on"
+								data-volume="mute"
+								data-videowidth="100%"
+								data-videoheight="100%"
+								data-ytid="agrHTsFUXBc"
+								data-videopreload="preload"
+								data-videoloop="loop"
+								data-volume="mute"
+								data-forceCover="1"
+								data-aspectratio="16:9"
+								data-autoplay="true"
+								data-autoplayonlyfirsttime="false"
+								data-nextslideatend="true"
+								data-videoattributes="version=3&enablejsapi=1&html5=1&hd=1&wmode=opaque&showinfo=0&rel=0&
+			 origin=http://webdevapprentice.uk"
+							></div>
+
+
+							<!--<div class="tp-caption"
+								data-x="center" data-hoffset="['-165','-165','-165','-215']"
+								data-y="center" data-voffset="['-110','-110','-110','-135']"
+								data-start="1000"
+								style="z-index: 5"
+								data-transform_in="x:[-300%];opacity:0;s:500;"
+								data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png" alt=""></div>-->
+
+							<div class="tp-caption text-color-light font-weight-normal"
+								data-x="center"
+								data-y="center" data-voffset="['-160','-160','-160','-185']"
+								data-start="700"
+								style="z-index: 5"
+								data-fontsize="['22','22','22','40']"
+								data-lineheight="['25','25','25','45']"
+								data-transform_in="y:[-50%];opacity:0;s:500;">Don't miss out</div>
+
+							<!--<div class="tp-caption"
+								data-x="center" data-hoffset="['165','165','165','215']"
+								data-y="center" data-voffset="['-110','-110','-110','-135']"
+								data-start="1000"
+								style="z-index: 5"
+								data-transform_in="x:[300%];opacity:0;s:500;"
+								data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png" alt=""></div>-->
+							<h1 class="tp-caption font-weight-extra-bold text-color-light negative-ls-2"
+								data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center"
+								style="z-index: 5"
+								data-y="center" data-voffset="['-80','-80','-80','-60']"
+								data-fontsize="['50','50','50','90']"
+								data-lineheight="['55','55','55','95']">Become a Trainee <br>Web Developer</h1>
+
+							<div class="tp-caption font-weight-light text-center"
+								data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2000,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+								data-x="center"
+								style="z-index: 5"
+								data-y="center" data-voffset="['0','0','0','100']"
+								data-fontsize="['18','18','18','50']"
+								data-lineheight="['29','29','29','40']"
+								style="color: #b5b5b5;">Fast track your way into an interesting and creative career.</div>
+
+							<a class="tp-caption btn btn-light font-weight-bold text-color-primary"
+								href="#intro"
+								data-hash data-hash-offset="32"
+								data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center" data-hoffset="['-120','-120','-120','-195']"
+								data-y="center" data-voffset="['65','65','65','210']"
+								style="z-index: 5"
+								data-paddingtop="['15','15','15','30']"
+								data-paddingbottom="['15','15','15','30']"
+								data-paddingleft="['33','33','33','50']"
+								data-paddingright="['33','33','33','50']"
+								data-fontsize="['13','13','13','25']"
+								data-lineheight="['20','20','20','25']">Find out more <i class="fas fa-chevron-down"></i></a>
+
+							<a class="tp-caption btn btn-primary font-weight-bold"
+								href="https://calendly.com/crispin_read/wda/12-04-2018"
+								data-frames='[{"delay":3000,"speed":2000,"frame":"0","from":"y:50%;opacity:0;","to":"y:0;o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+								data-x="center" data-hoffset="['90','90','90','165']"
+								data-y="center" data-voffset="['65','65','65','210']"
+								data-paddingtop="['15','15','15','30']"
+								style="z-index: 5"
+								data-paddingbottom="['15','15','15','30']"
+								data-paddingleft="['33','33','33','50']"
+								data-paddingright="['33','33','33','50']"
+								data-fontsize="['13','13','13','25']"
+								data-lineheight="['20','20','20','25']"><i class="fas fa-phone"></i> Book a call</a>
+
+
+
+
+
+
+							<div class="tp-dottedoverlay tp-opacity-overlay"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
 		<div role="main" class="main">
 
       <section id="info" class="section section-no-border background-color-light m-0">

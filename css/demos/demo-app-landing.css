@@ -180,10 +180,11 @@ h1 {
 	line-height: 1;
 	margin-left: -5px;
 	letter-spacing: -3px;
+	margin-bottom: 20px;
 }
 @media (max-width: 991px) {
 	h1 {
-		font-size: 4.6em;
+		font-size: 3.6em;
 	}
 }
 

@@ -96,9 +96,9 @@ h1.page-title {
   margin-bottom: 32px;
 }
 
-.intro-img{
-  width: 100%
-
+.intro-img {
+    width: 50%;
+    margin: 20px auto;
 }
 
 a.highlight{

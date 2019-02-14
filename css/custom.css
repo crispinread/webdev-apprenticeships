@@ -105,3 +105,6 @@ a.highlight{
   font-weight: bold;
   text-decoration: underline;
 }
+#footer{
+  margin-top: 0;
+}

@@ -2,3 +2,8 @@
   from = "blog.webdevapprentice.uk"
   to = "https://thecodersguild.org.uk/blog/"
   status = 301
+  
+[[redirects]]
+  from = "levy.webdevapprentice.uk"
+  to = "https://thecodersguild.org.uk/blog/Web-Dev-Apprentice-History/"
+  status = 301

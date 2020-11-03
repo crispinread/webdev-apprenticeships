@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "blog.webdevapprentice.uk"
+  to = "https://thecodersguild.org.uk/blog/"
+  status = 301
